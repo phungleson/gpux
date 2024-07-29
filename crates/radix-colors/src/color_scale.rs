@@ -39,8 +39,7 @@ impl ColorScaleStep {
 
 /// A scale of colors for a given [`ColorScaleSet`].
 ///
-/// Each [`ColorScale`] contains exactly 12 colors. Refer to
-/// [`ColorScaleStep`] for a reference of what each step is used for.
+/// Each [`ColorScale`] contains exactly 12 colors. Refer to [`ColorScaleStep`] for a reference of what each step is used for.
 pub struct ColorScale(Vec<Hsla>);
 
 impl FromIterator<Hsla> for ColorScale {
@@ -60,7 +59,6 @@ impl ColorScale {
     /// `Step 1` - Used for main application backgrounds.
     ///
     /// This step provides a neutral base for any overlaying components, ideal for applications' main backdrop or empty spaces such as canvas areas.
-    ///
     #[inline]
     pub fn step_1(&self) -> Hsla {
         self.step(ColorScaleStep::ONE)
@@ -124,8 +122,7 @@ impl ColorScale {
     ///
     /// `Step 9` is the most saturated step, having the least mix of white or black.
     ///
-    /// Due to its high chroma, `Step 9` is versatile and particularly useful for semantic colors such as
-    /// error, warning, and success indicators.
+    /// Due to its high chroma, `Step 9` is versatile and particularly useful for semantic colors such as error, warning, and success indicators.
     #[inline]
     pub fn step_9(&self) -> Hsla {
         self.step(ColorScaleStep::NINE)

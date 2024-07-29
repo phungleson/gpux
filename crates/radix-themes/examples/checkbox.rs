@@ -2,8 +2,8 @@ use gpui::{
     div, px, rgb, size, App, Bounds, IntoElement, ParentElement, Render, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
-use helpers::{interactivity::Disableable, interactivity::Selection};
-use radix_themes::{assets::Assets, checkbox::Checkbox, theme::Theme};
+use gpux_interactivity::{disableable::Disableable, selection::Selection};
+use gpux_radix_themes::{assets::Assets, checkbox::Checkbox, theme::Theme};
 
 struct Main {
     checked: Selection,

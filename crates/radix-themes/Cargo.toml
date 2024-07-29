@@ -1,5 +1,5 @@
 [package]
-name = "radix-themes"
+name = "gpux-radix-themes"
 description = "GPUX Radix Themes components"
 version = "0.1.0"
 edition = "2021"

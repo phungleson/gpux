@@ -12,12 +12,12 @@ pub fn box_shadow(
     y: impl Into<Pixels>,
     blur_radius: impl Into<Pixels>,
     spread_radius: impl Into<Pixels>,
-    color: Hsla,
+    color: impl Into<Hsla>,
 ) -> BoxShadow {
     BoxShadow {
         offset: point(x.into(), y.into()),
         blur_radius: blur_radius.into(),
         spread_radius: spread_radius.into(),
-        color,
+        color: color.into(),
     }
 }

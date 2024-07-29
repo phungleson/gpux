@@ -1,1 +1,1 @@
-mod logos;
+pub mod logos;

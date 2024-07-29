@@ -7,12 +7,10 @@ publish = false
 
 [dependencies]
 gpui.workspace = true
+smallvec.workspace = true
 anyhow.workspace = true
-log.workspace = true
-serde.workspace = true
-serde_json.workspace = true
 gpux-css.workspace = true
-rust-embed.workspace = true
+gpux-interactivity.workspace = true
 
 [lints]
 workspace = true

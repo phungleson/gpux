@@ -1883,10 +1883,8 @@ dependencies = [
  "anyhow",
  "gpui",
  "gpux-css",
- "log",
- "rust-embed",
- "serde",
- "serde_json",
+ "gpux-interactivity",
+ "smallvec",
 ]
 
 [[package]]
@@ -1895,6 +1893,20 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "gpui",
+]
+
+[[package]]
+name = "gpux-radix-themes"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "gpui",
+ "gpux-css",
+ "gpux-interactivity",
+ "log",
+ "rust-embed",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -3101,20 +3113,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0fa76aaf39101c457836aec0ce2316dbdc3ab723cdda1c6bd4e6ad4208acaca7"
 dependencies = [
  "proc-macro2",
-]
-
-[[package]]
-name = "radix-themes"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "gpui",
- "gpux-css",
- "gpux-interactivity",
- "log",
- "rust-embed",
- "serde",
- "serde_json",
 ]
 
 [[package]]

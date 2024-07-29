@@ -1,2 +1,2 @@
-# GPUX Helpers
+# GPUX Interactivity
 

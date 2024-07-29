@@ -1,6 +1,6 @@
 [package]
-name = "radix-themes"
-description = "GPUX Radix Themes components"
+name = "gpux-nes-css"
+description = "GPUX NES.css components"
 version = "0.1.0"
 edition = "2021"
 publish = false
@@ -12,12 +12,11 @@ log.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 gpux-css.workspace = true
-gpux-interactivity.workspace = true
 rust-embed.workspace = true
 
 [lints]
 workspace = true
 
 [[example]]
-name = "checkbox"
-path = "examples/checkbox.rs"
+name = "logos"
+path = "examples/logos.rs"

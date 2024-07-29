@@ -1,5 +1,5 @@
 use gpui::{Global, Hsla, SharedString};
-use helpers::css::hsla;
+use gpux_css::color::hsla;
 
 use crate::colors::Colors;
 

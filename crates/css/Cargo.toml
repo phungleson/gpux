@@ -1,0 +1,9 @@
+[package]
+name = "gpux-css"
+description = "Common helpers for GPUX"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+gpui.workspace = true

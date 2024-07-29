@@ -1,5 +1,5 @@
 use gpui::Hsla;
-use helpers::css::{hsl, hsla};
+use gpux_css::color::{hsl, hsla};
 
 /// A gorgeous, accessible color system for user interfaces.
 /// There are 12 steps in each scale.

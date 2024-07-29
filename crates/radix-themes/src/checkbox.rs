@@ -6,10 +6,10 @@ use gpui::{
     SharedString, WindowContext,
 };
 
-use helpers::css::StackExt;
-use helpers::interactivity::Disableable;
-use helpers::interactivity::Selectable;
-use helpers::interactivity::Selection;
+use gpux_css::stack_ext::StackExt;
+use gpux_interactivity::disableable::Disableable;
+use gpux_interactivity::selectable::Selectable;
+use gpux_interactivity::selection::Selection;
 
 use crate::colors::Colors;
 use crate::icon::Icon;

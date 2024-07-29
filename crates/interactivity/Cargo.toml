@@ -1,6 +1,6 @@
 [package]
-name = "helpers"
-description = "Common helpers for GPUX"
+name = "gpux-interactivity"
+description = "Common interactivity helpers for GPUX"
 version = "0.1.0"
 edition = "2021"
 publish = false

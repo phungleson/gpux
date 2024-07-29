@@ -1863,6 +1863,41 @@ dependencies = [
 ]
 
 [[package]]
+name = "gpux-css"
+version = "0.1.0"
+dependencies = [
+ "gpui",
+]
+
+[[package]]
+name = "gpux-interactivity"
+version = "0.1.0"
+dependencies = [
+ "gpui",
+]
+
+[[package]]
+name = "gpux-nes-css"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "gpui",
+ "gpux-css",
+ "log",
+ "rust-embed",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "gpux-radix-color"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "gpui",
+]
+
+[[package]]
 name = "grid"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1901,13 +1936,6 @@ name = "heck"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
-
-[[package]]
-name = "helpers"
-version = "0.1.0"
-dependencies = [
- "gpui",
-]
 
 [[package]]
 name = "hermit-abi"
@@ -3081,7 +3109,8 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "gpui",
- "helpers",
+ "gpux-css",
+ "gpux-interactivity",
  "log",
  "rust-embed",
  "serde",

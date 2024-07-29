@@ -18,3 +18,7 @@ workspace = true
 [[example]]
 name = "logos"
 path = "examples/logos.rs"
+
+[[example]]
+name = "characters"
+path = "examples/characters.rs"

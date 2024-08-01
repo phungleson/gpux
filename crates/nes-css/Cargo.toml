@@ -9,6 +9,7 @@ publish = false
 gpui.workspace = true
 smallvec.workspace = true
 anyhow.workspace = true
+once_cell.workspace = true
 gpux-css.workspace = true
 gpux-interactivity.workspace = true
 

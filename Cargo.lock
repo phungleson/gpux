@@ -1907,6 +1907,7 @@ dependencies = [
  "gpui",
  "gpux-css",
  "gpux-interactivity",
+ "once_cell",
  "smallvec",
 ]
 

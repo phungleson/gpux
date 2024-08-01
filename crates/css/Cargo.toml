@@ -7,3 +7,6 @@ publish = false
 
 [dependencies]
 gpui.workspace = true
+regex.workspace = true
+serde.workspace = true
+smallvec.workspace = true

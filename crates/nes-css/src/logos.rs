@@ -1,11 +1,25 @@
 pub use facebook::*;
 pub use github::*;
+pub use gmail::*;
 pub use google::*;
 pub use instagram::*;
+pub use linkedin::*;
+pub use medium::*;
+pub use reddit::*;
+pub use twitch::*;
 pub use twitter::*;
+pub use whatsapp::*;
+pub use youtube::*;
 
 mod facebook;
 mod github;
+mod gmail;
 mod google;
 mod instagram;
+mod linkedin;
+mod medium;
+mod reddit;
+mod twitch;
 mod twitter;
+mod whatsapp;
+mod youtube;

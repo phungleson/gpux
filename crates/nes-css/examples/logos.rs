@@ -2,7 +2,10 @@ use gpui::{
     div, px, rgb, size, App, Bounds, IntoElement, ParentElement, Render, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
-use gpux_nes_css::logos::{Facebook, Github, Google, Instagram, Twitter};
+use gpux_nes_css::logos::{
+    Facebook, Github, Gmail, Google, Instagram, Linkedin, Medium, Reddit, Twitch, Twitter,
+    Whatsapp, Youtube,
+};
 
 struct Logos {}
 
@@ -15,11 +18,18 @@ impl Render for Logos {
             .justify_center()
             .items_center()
             .gap_2()
-            .child(Twitter::new("twitter"))
             .child(Facebook::new("facebook"))
-            .child(Instagram::new("instagram"))
             .child(Github::new("github"))
+            .child(Gmail::new("gmail"))
             .child(Google::new("google"))
+            .child(Instagram::new("instagram"))
+            .child(Linkedin::new("linkedin"))
+            .child(Medium::new("medium"))
+            .child(Reddit::new("reddit"))
+            .child(Twitch::new("twitch"))
+            .child(Twitter::new("twitter"))
+            .child(Whatsapp::new("whatsapp"))
+            .child(Youtube::new("youtube"))
     }
 }
 

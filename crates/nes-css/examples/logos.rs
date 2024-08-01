@@ -2,7 +2,7 @@ use gpui::{
     div, px, rgb, size, App, Bounds, IntoElement, ParentElement, Render, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
-use gpux_nes_css::logos::{Facebook, Twitter};
+use gpux_nes_css::logos::{Facebook, Instagram, Twitter};
 
 struct Logos {}
 
@@ -17,6 +17,7 @@ impl Render for Logos {
             .gap_2()
             .child(Twitter::new("twitter"))
             .child(Facebook::new("facebook"))
+            .child(Instagram::new("instagram"))
     }
 }
 

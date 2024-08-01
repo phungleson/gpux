@@ -63,7 +63,6 @@ pub fn box_shadow_str(str: &'_ str) -> Option<BoxShadow> {
         let (_, [x_str, y_str, color_str, _]) = capture.extract();
         let x = x_str.parse::<f32>().unwrap_or(0.);
         let y = y_str.parse::<f32>().unwrap_or(0.);
-        dbg!(&color_str);
         let color = color_str.try_into().unwrap_or(rgb(0x000000));
 
         BoxShadow {

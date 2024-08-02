@@ -1909,6 +1909,7 @@ dependencies = [
  "gpux-interactivity",
  "once_cell",
  "regex",
+ "rust-embed",
  "smallvec",
 ]
 

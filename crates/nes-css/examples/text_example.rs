@@ -2,12 +2,11 @@ use gpui::{
     App, Bounds, div, IntoElement, ParentElement, px, Render, rgb, size, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
+use gpux_nes_css::assets::Assets;
 
-use gpux_nes_css::controllers::{Nes, NesJp, Snes, SnesJp};
+struct TextExample {}
 
-struct Controllers {}
-
-impl Render for Controllers {
+impl Render for TextExample {
     fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex()
@@ -15,24 +14,24 @@ impl Render for Controllers {
             .bg(rgb(0xffffff))
             .size_full()
             .items_center()
-            .child(Nes::new("nes"))
-            .child(NesJp::new("nes-jp"))
-            .child(Snes::new("snes"))
-            .child(SnesJp::new("snes-jp"))
+            .font_family("Press Start 2P")
+            .child("Text")
     }
 }
 
 fn main() {
-    let app = App::new();
+    let app = App::new().with_assets(Assets);
 
     app.run(move |cx| {
+        Assets::init(cx).unwrap();
+
         let bounds = Bounds::centered(None, size(px(300.0), px(300.0)), cx);
         cx.open_window(
             WindowOptions {
                 window_bounds: Some(WindowBounds::Windowed(bounds)),
                 ..Default::default()
             },
-            |cx| cx.new_view(|_cx| Controllers {}),
+            |cx| cx.new_view(|_cx| TextExample {}),
         ).unwrap();
     });
 }

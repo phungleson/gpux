@@ -12,7 +12,8 @@ anyhow.workspace = true
 once_cell.workspace = true
 gpux-css.workspace = true
 gpux-interactivity.workspace = true
-regex = "1.10.5"
+regex.workspace = true
+rust-embed.workspace = true
 
 [lints]
 workspace = true

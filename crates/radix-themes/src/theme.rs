@@ -1,7 +1,7 @@
 use gpui::{px, rems, rgba, Global, Hsla, Pixels, Rems, SharedString};
 use once_cell::sync::Lazy;
 
-use gpux_css::color::hsla;
+use gpux_css::color::{hsla, white};
 use gpux_radix_colors::color_scale::ColorScale;
 use gpux_radix_colors::color_scales::{color_scales, ColorScales};
 use gpux_theme::theme_mode::ThemeMode;

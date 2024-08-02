@@ -1,17 +1,16 @@
-use gpui::{Global, Hsla, Pixels, px, Rems, rems, rgba, SharedString};
+use gpui::{px, rems, rgba, Global, Hsla, Pixels, Rems, SharedString};
 use once_cell::sync::Lazy;
 
 use gpux_css::color::hsla;
-use gpux_css::color::white;
 use gpux_radix_colors::color_scale::ColorScale;
-use gpux_radix_colors::color_scales::{ColorScales, default_color_scales};
+use gpux_radix_colors::color_scales::{color_scales, ColorScales};
 use gpux_theme::theme_mode::ThemeMode;
 
 use crate::theme::scale::NineScale;
 
 mod scale;
 
-static COLOR_SCALES: Lazy<ColorScales> = Lazy::new(default_color_scales);
+static COLOR_SCALES: Lazy<ColorScales> = Lazy::new(color_scales);
 
 #[derive(Default, Copy, Clone)]
 pub enum AccentColor {
@@ -147,8 +146,8 @@ impl ThemeColor {
 #[derive(Default)]
 pub struct Theme {
     // pub font_size: f32,
-    pub(crate)  font_family: SharedString,
-    pub(crate)  theme_mode: ThemeMode,
+    pub(crate) font_family: SharedString,
+    pub(crate) theme_mode: ThemeMode,
     // Accent theme colors
     indigo: ThemeColor,
     cyan: ThemeColor,

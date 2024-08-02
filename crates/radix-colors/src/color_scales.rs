@@ -38,7 +38,8 @@ pub struct ColorScales {
     pub white: ColorScaleSet,
 }
 
-pub fn default_color_scales() -> ColorScales {
+/// Returns a ColorScales object containing various color scales, which can be used to create consistent and harmonious color palettes.
+pub fn color_scales() -> ColorScales {
     ColorScales {
         gray: gray(),
         mauve: mauve(),

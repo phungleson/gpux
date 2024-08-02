@@ -25,3 +25,6 @@ name = "characters"
 
 [[example]]
 name = "controllers"
+
+[[example]]
+name = "buttons"

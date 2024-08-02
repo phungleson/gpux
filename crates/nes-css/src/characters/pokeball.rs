@@ -179,7 +179,7 @@ impl RenderOnce for Pokeball {
             )
         });
 
-        div().size_4().relative().child(
+        div().min_h(px(84.)).min_w(px(84.)).relative().child(
             div()
                 .absolute()
                 .top(px(-6.))

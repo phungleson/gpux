@@ -1,7 +1,8 @@
 use gpui::{
-    div, px, rgb, size, App, Bounds, IntoElement, ParentElement, Render, Styled, ViewContext,
+    App, Bounds, div, IntoElement, ParentElement, px, Render, rgb, size, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
+
 use gpux_nes_css::characters::Pokeball;
 
 struct Characters {}
@@ -12,9 +13,7 @@ impl Render for Characters {
             .flex()
             .bg(rgb(0xffffff))
             .size_full()
-            .justify_center()
             .items_center()
-            .gap_2()
             .child(Pokeball::new("pokeball"))
             .child(Pokeball::new("pokeball"))
             .child(Pokeball::new("pokeball"))

@@ -1,5 +1,5 @@
 use gpui::SharedString;
-
+use gpux_theme::theme_mode::ThemeMode;
 use crate::color_scale::ColorScale;
 
 /// Provides groups of [`ColorScale`]s for light and dark themes, as well as transparent versions of each scale.
@@ -30,6 +30,20 @@ impl ColorScaleSet {
 
     pub fn name(&self) -> &SharedString {
         &self.name
+    }
+
+    pub fn color_scale(&self, theme_mode: &ThemeMode) -> &ColorScale {
+        match theme_mode {
+            ThemeMode::Light => &self.light,
+            ThemeMode::Dark => &self.dark,
+        }
+    }
+
+    pub fn color_scale_alpha(&self, theme_mode: &ThemeMode) -> &ColorScale {
+        match theme_mode {
+            ThemeMode::Light => &self.light_alpha,
+            ThemeMode::Dark => &self.dark_alpha,
+        }
     }
 
     pub fn light(&self) -> &ColorScale {

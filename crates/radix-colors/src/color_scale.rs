@@ -20,7 +20,7 @@ impl ColorScaleStep {
     pub const ELEVEN: Self = Self(11);
     pub const TWELVE: Self = Self(12);
 
-    /// All of the steps in a [`ColorScale`].
+    /// All the steps in a [`ColorScale`].
     pub const ALL: [ColorScaleStep; 12] = [
         Self::ONE,
         Self::TWO,
@@ -40,6 +40,7 @@ impl ColorScaleStep {
 /// A scale of colors for a given [`ColorScaleSet`].
 ///
 /// Each [`ColorScale`] contains exactly 12 colors. Refer to [`ColorScaleStep`] for a reference of what each step is used for.
+#[derive(Default, Clone)]
 pub struct ColorScale(Vec<Hsla>);
 
 impl FromIterator<Hsla> for ColorScale {

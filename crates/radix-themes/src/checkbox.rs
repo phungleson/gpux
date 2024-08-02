@@ -1,17 +1,16 @@
 use std::fmt;
 
-use gpui::{div, rems, transparent_white, InteractiveElement, StatefulInteractiveElement, Styled};
+use gpui::{div, InteractiveElement, px, rems, StatefulInteractiveElement, Styled};
 use gpui::{
-    prelude::FluentBuilder as _, svg, ElementId, IntoElement, ParentElement, RenderOnce,
-    SharedString, WindowContext,
+    ElementId, IntoElement, ParentElement, prelude::FluentBuilder as _, RenderOnce, SharedString,
+    svg, WindowContext,
 };
 
 use gpux_css::stack_ext::StackExt;
 use gpux_interactivity::disableable::Disableable;
 use gpux_interactivity::selectable::Selectable;
 use gpux_interactivity::selection::Selection;
-
-use crate::colors::Colors;
+use crate::color::Color;
 use crate::icon::Icon;
 use crate::theme::Theme;
 
@@ -40,12 +39,28 @@ impl RenderOnce for CheckboxIcon {
 
 type OnClick = Box<dyn Fn(&Selection, &mut WindowContext) + 'static>;
 
+pub enum CheckboxSize {
+    One,
+    Two,
+    Three,
+}
+
+pub enum CheckboxVariant {
+    Classic,
+    Surface,
+    Soft,
+}
+
+
 #[derive(IntoElement)]
 pub struct Checkbox {
     id: ElementId,
     checked: Selection,
     disabled: bool,
     label: Option<SharedString>,
+    size: CheckboxSize,
+    variant: CheckboxVariant,
+    color: Option<Color>,
     on_click: Option<OnClick>,
 }
 
@@ -57,6 +72,9 @@ impl Checkbox {
             disabled: false,
             label: None,
             on_click: None,
+            size: CheckboxSize::One,
+            color: None,
+            variant: CheckboxVariant::Surface,
         }
     }
 
@@ -106,21 +124,15 @@ impl RenderOnce for Checkbox {
                     .flex()
                     .justify_center()
                     .items_center()
-                    .border_1()
-                    .border_color(theme.accent_indicator)
-                    .rounded_sm()
-                    .shadow_lg()
+                    .rounded_md()
                     .size_4()
                     .map(|this| match self.checked {
-                        Selection::Unselected => this.bg(transparent_white()),
+                        Selection::Unselected => this.bg(theme.color_surface).border_1().border_color(theme.gray_alpha.step_9()),
                         _ => this.bg(theme.accent_indicator),
                     })
-                    .map(|this| {
-                        if !self.disabled {
-                            return this;
-                        }
-
-                        this.bg(Colors::slate_alpha().step_3)
+                    .map(|this| match self.disabled {
+                        true => this.bg(theme.gray_alpha.step_3()),
+                        _ => this,
                     })
                     .child(
                         svg()
@@ -132,13 +144,13 @@ impl RenderOnce for Checkbox {
                             }),
                     ),
             )
-            .map(|this| {
-                if let Some(label) = self.label.as_ref() {
-                    this.child(label.to_string())
-                        .text_color(theme.accent_contrast)
-                } else {
-                    this
-                }
+            .map(|this| match self.label.as_ref() {
+                Some(label) => this
+                    .text_sm()
+                    .line_height(px(20.))
+                    .text_color(theme.gray.step_12())
+                    .child(label.to_string()),
+                _ => this
             })
             .when_some(
                 self.on_click.filter(|_| !self.disabled),

@@ -5,6 +5,7 @@ members = [
     "crates/nes-css",
     "crates/radix-colors",
     "crates/radix-themes",
+    "crates/theme",
 ]
 resolver = "2"
 
@@ -22,6 +23,7 @@ gpux-css = { path = "crates/css" }
 gpux-interactivity = { path = "crates/interactivity" }
 gpux-radix-colors = { path = "crates/radix-colors" }
 gpux-radix-themes = { path = "crates/radix-themes" }
+gpux-theme = { path = "crates/theme" }
 
 [workspace.lints.clippy]
 dbg_macro = "deny"

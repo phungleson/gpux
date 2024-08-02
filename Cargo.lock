@@ -1912,11 +1912,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "gpux-radix-color"
+name = "gpux-radix-colors"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "gpui",
+ "gpux-css",
+ "gpux-theme",
 ]
 
 [[package]]
@@ -1927,11 +1929,19 @@ dependencies = [
  "gpui",
  "gpux-css",
  "gpux-interactivity",
+ "gpux-radix-colors",
+ "gpux-theme",
  "log",
+ "once_cell",
  "rust-embed",
  "serde",
  "serde_json",
+ "smallvec",
 ]
+
+[[package]]
+name = "gpux-theme"
+version = "0.1.0"
 
 [[package]]
 name = "grid"

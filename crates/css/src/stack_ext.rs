@@ -1,15 +1,15 @@
 use gpui::Styled;
 
-/// Extends [`gpui::Styled`] with specific flex methods.
+/// Extends [`gpui::Styled`] with specific methods.
 pub trait StackExt: Styled + Sized {
-    /// Horizontally stacks elements.
+    /// Stacks elements horizontally.
     ///
     /// Sets `flex()`, `flex_row()`, `items_center()`
     fn stack_h(self) -> Self {
         self.flex().flex_row().items_center()
     }
 
-    /// Vertically stacks elements.
+    /// Stacks elements vertically.
     ///
     /// Sets `flex()`, `flex_col()`
     fn stack_v(self) -> Self {

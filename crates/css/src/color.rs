@@ -18,3 +18,8 @@ pub fn hsl(h: f32, s: f32, l: f32) -> Hsla {
 pub fn hsla(h: f32, s: f32, l: f32, a: f32) -> Hsla {
     gpui::hsla(h / 360., s / 100.0, l / 100.0, a)
 }
+
+/// Makes white color
+pub fn white() -> Hsla {
+    hsl(0., 100., 100.)
+}

@@ -1,25 +1,17 @@
 use gpui::{
-    App, Bounds, div, IntoElement, ParentElement, px, Render, rgb, size, Styled, ViewContext,
+    App, Bounds, div, IntoElement, px, Render, rgb, size, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
 
-use gpux_interactivity::{disableable::Disableable, selection::Selection};
-use gpux_radix_themes::{assets::Assets, checkbox::Checkbox, theme::Theme};
+use gpux_interactivity::selection::Selection;
+use gpux_radix_themes::{assets::Assets, theme::Theme};
 use gpux_theme::theme_mode::ThemeMode;
 
 struct Main {
-    checked: Selection,
 }
 
 impl Render for Main {
     fn render(&mut self, cx: &mut ViewContext<Self>) -> impl IntoElement {
-        let checkbox = Checkbox::new("test")
-            .label("Checkbox")
-            .checked(self.checked)
-            .on_click(cx.listener(|view, _, _| {
-                view.checked = view.checked.inverse();
-            }));
-
         div()
             .flex()
             .bg(rgb(0xffffff))
@@ -28,8 +20,6 @@ impl Render for Main {
             .items_center()
             .border_1()
             .text_color(rgb(0xffffff))
-            .child(checkbox)
-            .child(Checkbox::new("test1").disabled(true).label("Disabled"))
     }
 }
 
@@ -46,7 +36,6 @@ fn main() {
             },
             |cx| {
                 cx.new_view(|_cx| Main {
-                    checked: Selection::Selected,
                 })
             },
         )

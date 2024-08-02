@@ -11,9 +11,13 @@ anyhow.workspace = true
 log.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+gpux-radix-colors.workspace = true
 gpux-css.workspace = true
+gpux-theme.workspace = true
 gpux-interactivity.workspace = true
 rust-embed.workspace = true
+once_cell.workspace = true
+smallvec.workspace = true
 
 [lints]
 workspace = true

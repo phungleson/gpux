@@ -1,0 +1,8 @@
+[package]
+name = "gpux-theme"
+description = "GPUX theme helpers"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]

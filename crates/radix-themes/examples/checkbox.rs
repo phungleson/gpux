@@ -6,7 +6,7 @@ use gpui::{
 use gpux_css::color::white;
 use gpux_interactivity::{disableable::Disableable, selection::Selection};
 use gpux_radix_themes::{assets::Assets, checkbox::Checkbox, theme::Theme};
-use gpux_radix_themes::checkbox::CheckboxSize;
+use gpux_radix_themes::checkbox::{CheckboxSize, CheckboxVariant};
 use gpux_radix_themes::theme::{AccentColor, GrayColor};
 use gpux_theme::theme_mode::ThemeMode;
 
@@ -22,6 +22,16 @@ impl Render for Main {
             .justify_center()
             .bg(white())
             .size_full()
+            .child(div()
+                .child("Variant")
+                .child(div().flex_col()
+                    .child(Checkbox::new("soft-selected").checked(Selection::Selected).variant(CheckboxVariant::Soft).label("Soft"))
+                    .child(Checkbox::new("soft-not-selected").checked(Selection::Unselected).variant(CheckboxVariant::Soft))
+                    .child(Checkbox::new("classic-selected").checked(Selection::Selected).variant(CheckboxVariant::Classic).label("Classic"))
+                    .child(Checkbox::new("classic-not-selected").checked(Selection::Unselected).variant(CheckboxVariant::Classic))
+                    .child(Checkbox::new("surface-selected").checked(Selection::Selected).variant(CheckboxVariant::Surface).label("Surface"))
+                    .child(Checkbox::new("surface-not-selected").checked(Selection::Unselected).variant(CheckboxVariant::Surface)))
+            )
             .child(div()
                 .child("Color")
                 .child(div().flex_col()
@@ -57,7 +67,6 @@ impl Render for Main {
             )
     }
 }
-
 fn main() {
     let app = App::new().with_assets(Assets);
 

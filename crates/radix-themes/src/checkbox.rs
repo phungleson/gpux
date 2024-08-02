@@ -1,6 +1,6 @@
 use std::fmt;
 
-use gpui::{div, InteractiveElement, Pixels, px, rems, Rems, StatefulInteractiveElement, Styled};
+use gpui::{div, Div, InteractiveElement, Pixels, px, rems, Rems, StatefulInteractiveElement, Styled, Svg};
 use gpui::{
     ElementId, IntoElement, ParentElement, prelude::FluentBuilder as _, RenderOnce, SharedString,
     svg, WindowContext,
@@ -74,7 +74,7 @@ impl Checkbox {
             on_click: None,
             size: CheckboxSize::Two,
             color: None,
-            variant: CheckboxVariant::Surface,
+            variant: CheckboxVariant::Soft,
         }
     }
 
@@ -100,6 +100,11 @@ impl Checkbox {
 
     pub fn color(mut self, color: AccentColor) -> Self {
         self.color = Some(color);
+        self
+    }
+
+    pub fn variant(mut self, variant: CheckboxVariant) -> Self {
+        self.variant = variant;
         self
     }
 
@@ -142,6 +147,55 @@ impl Checkbox {
             CheckboxSize::Three => theme.letter_spacing.step_4(),
         }
     }
+
+    fn render_check_div_variant(&self, theme: &Theme, div: Div) -> Div {
+        div
+            .map(|this| match self.checked {
+                Selection::Unselected => this
+                    .bg(match self.variant {
+                        CheckboxVariant::Soft => theme.accent(self.color).surface,
+                        CheckboxVariant::Classic => theme.accent(self.color).surface,
+                        CheckboxVariant::Surface => theme.accent(self.color).transparent.step_5(),
+                    })
+                    .border_1()
+                    .border_color(
+                        match self.variant {
+                            CheckboxVariant::Soft => theme.gray().transparent.step_7(),
+                            // TODO: add shadow
+                            CheckboxVariant::Classic => theme.gray().transparent.step_7(),
+                            CheckboxVariant::Surface => theme.accent(self.color).transparent.step_5(),
+                        }
+                    )
+                ,
+                _ => this.bg(match self.variant {
+                    CheckboxVariant::Soft => theme.accent(self.color).indicator,
+                    CheckboxVariant::Classic => theme.accent(self.color).indicator,
+                    CheckboxVariant::Surface => theme.accent(self.color).transparent.step_5(),
+                }),
+            })
+            .map(|this| match self.disabled {
+                true => this.bg(theme.gray().transparent.step_3()).border_1().border_color(theme.gray().transparent.step_6()),
+                _ => this,
+            })
+    }
+
+    fn render_svg_variant(&self, theme: &Theme, svg: Svg) -> Svg {
+        svg
+            .map(|this| match self.disabled {
+                true => this.text_color(theme.gray().transparent.step_8()),
+                _ => this.text_color(
+                    match self.variant {
+                        CheckboxVariant::Soft => theme.accent(self.color).contrast,
+                        CheckboxVariant::Classic => theme.accent(self.color).contrast,
+                        CheckboxVariant::Surface => theme.accent(self.color).transparent.step_11(),
+                    }
+                ),
+            })
+            .map(|this| match self.checked {
+                Selection::Selected => this.path(CheckboxIcon::Check.path()),
+                _ => this,
+            })
+    }
 }
 
 impl Disableable for Checkbox {
@@ -165,39 +219,19 @@ impl RenderOnce for Checkbox {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
         let theme = cx.global::<Theme>();
 
+        let svg = svg().size(rems(0.625));
+        let check_div = div()
+            .flex()
+            .justify_center()
+            .items_center()
+            .rounded(self.render_border_radius())
+            .size(self.render_size())
+            .child(self.render_svg_variant(theme, svg));
+
         div()
             .stack_h()
             .gap_2()
-            .child(
-                div()
-                    .flex()
-                    .justify_center()
-                    .items_center()
-                    .rounded(self.render_border_radius())
-                    .size(self.render_size())
-                    .map(|this| match self.checked {
-                        Selection::Unselected => this.bg(theme.color_surface).border_1()
-                            .border_color(theme.gray().transparent.step_9())
-                        ,
-                        _ => this.bg(theme.accent(self.color).indicator),
-                    })
-                    .map(|this| match self.disabled {
-                        true => this.bg(theme.gray().transparent.step_3()).border_1().border_color(theme.gray().transparent.step_6()),
-                        _ => this,
-                    })
-                    .child(
-                        svg()
-                            .size(rems(0.625))
-                            .map(|this| match self.disabled {
-                                true => this.text_color(theme.gray().transparent.step_8()),
-                                _ => this.text_color(theme.accent(self.color).contrast),
-                            })
-                            .map(|this| match self.checked {
-                                Selection::Selected => this.path(CheckboxIcon::Check.path()),
-                                _ => this,
-                            }),
-                    ),
-            )
+            .child(self.render_check_div_variant(theme, check_div))
             .map(|this| match self.label.as_ref() {
                 Some(label) => this
                     .text_size(self.render_font_size(theme))

@@ -19,7 +19,14 @@ pub fn hsla(h: f32, s: f32, l: f32, a: f32) -> Hsla {
     gpui::hsla(h / 360., s / 100.0, l / 100.0, a)
 }
 
-/// Makes white color
+/// Makes a white color.
 pub fn white() -> Hsla {
     hsl(0., 100., 100.)
+}
+
+/// Makes a transparent white color.
+///
+/// Returns an [gpui::Hsla] color with fully opaque white (h=0, s=0, l=100) and fully transparent alpha (a=0).
+pub fn transparent_white() -> Hsla {
+    hsla(0., 0., 100., 0.)
 }

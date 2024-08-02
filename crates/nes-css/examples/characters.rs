@@ -16,6 +16,13 @@ impl Render for Characters {
             .items_center()
             .gap_2()
             .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
+            .child(Pokeball::new("pokeball"))
     }
 }
 

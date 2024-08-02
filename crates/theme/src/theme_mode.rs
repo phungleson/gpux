@@ -1,5 +1,6 @@
-#[derive(Debug, PartialEq, PartialOrd, Eq)]
+#[derive(Debug, PartialEq, PartialOrd, Eq, Default, Copy, Clone)]
 pub enum ThemeMode {
+    #[default]
     Light,
     Dark,
 }

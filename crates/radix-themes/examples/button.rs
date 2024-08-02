@@ -3,8 +3,8 @@ use gpui::{
     VisualContext, WindowBounds, WindowOptions,
 };
 
-use gpux_interactivity::selection::Selection;
 use gpux_radix_themes::{assets::Assets, theme::Theme};
+use gpux_radix_themes::theme::{AccentColor, GrayColor};
 use gpux_theme::theme_mode::ThemeMode;
 
 struct Main {
@@ -27,7 +27,7 @@ fn main() {
     let app = App::new().with_assets(Assets);
 
     app.run(move |cx| {
-        cx.set_global(Theme::indigo(&ThemeMode::Light));
+        cx.set_global(Theme::new(&ThemeMode::Light, &AccentColor::Indigo, &GrayColor::Slate));
         let bounds = Bounds::centered(None, size(px(300.0), px(300.0)), cx);
         cx.open_window(
             WindowOptions {

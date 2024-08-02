@@ -3,7 +3,7 @@ use gpui::{
     VisualContext, WindowBounds, WindowOptions,
 };
 
-use gpux_nes_css::characters::Pokeball;
+use gpux_nes_css::characters::{Ash, Bulbasaur, Charmander, Kirby, Mario, Pokeball, Squirtle};
 
 struct Characters {}
 
@@ -11,17 +11,17 @@ impl Render for Characters {
     fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex()
+            .flex_row()
             .bg(rgb(0xffffff))
             .size_full()
             .items_center()
             .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
-            .child(Pokeball::new("pokeball"))
+            .child(Mario::new("mario"))
+            .child(Ash::new("ash"))
+            .child(Bulbasaur::new("bulbasaur"))
+            .child(Charmander::new("charmander"))
+            .child(Kirby::new("kirby"))
+            .child(Squirtle::new("squirtle"))
     }
 }
 

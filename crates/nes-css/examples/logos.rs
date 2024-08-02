@@ -4,7 +4,7 @@ use gpui::{
 };
 use gpux_nes_css::logos::{
     Facebook, Github, Gmail, Google, Instagram, Linkedin, Medium, Reddit, Twitch, Twitter,
-    Whatsapp, Youtube,
+    Whatsapp, Youtube, Discord
 };
 
 struct Logos {}
@@ -30,6 +30,7 @@ impl Render for Logos {
             .child(Twitter::new("twitter"))
             .child(Whatsapp::new("whatsapp"))
             .child(Youtube::new("youtube"))
+            .child(Discord::new("discord"))
     }
 }
 
@@ -44,7 +45,6 @@ fn main() {
                 ..Default::default()
             },
             |cx| cx.new_view(|_cx| Logos {}),
-        )
-        .unwrap();
+        ).unwrap();
     });
 }

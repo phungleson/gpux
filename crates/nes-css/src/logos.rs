@@ -10,7 +10,9 @@ pub use twitch::*;
 pub use twitter::*;
 pub use whatsapp::*;
 pub use youtube::*;
+pub use discord::*;
 
+mod discord;
 mod facebook;
 mod github;
 mod gmail;

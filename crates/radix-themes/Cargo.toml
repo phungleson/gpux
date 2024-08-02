@@ -24,4 +24,6 @@ workspace = true
 
 [[example]]
 name = "checkbox"
-path = "examples/checkbox.rs"
+
+[[example]]
+name = "text"

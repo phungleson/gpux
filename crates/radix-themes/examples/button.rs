@@ -27,7 +27,7 @@ fn main() {
     let app = App::new().with_assets(Assets);
 
     app.run(move |cx| {
-        cx.set_global(Theme::new(&ThemeMode::Light, &AccentColor::Indigo, &GrayColor::Slate));
+        cx.set_global(Theme::new(ThemeMode::Light, AccentColor::Indigo, GrayColor::Slate));
         let bounds = Bounds::centered(None, size(px(300.0), px(300.0)), cx);
         cx.open_window(
             WindowOptions {

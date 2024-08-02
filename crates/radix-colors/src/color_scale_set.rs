@@ -32,14 +32,14 @@ impl ColorScaleSet {
         &self.name
     }
 
-    pub fn color_scale(&self, theme_mode: &ThemeMode) -> &ColorScale {
+    pub fn color_scale(&self, theme_mode: ThemeMode) -> &ColorScale {
         match theme_mode {
             ThemeMode::Light => &self.light,
             ThemeMode::Dark => &self.dark,
         }
     }
 
-    pub fn color_scale_alpha(&self, theme_mode: &ThemeMode) -> &ColorScale {
+    pub fn color_scale_alpha(&self, theme_mode: ThemeMode) -> &ColorScale {
         match theme_mode {
             ThemeMode::Light => &self.light_alpha,
             ThemeMode::Dark => &self.dark_alpha,

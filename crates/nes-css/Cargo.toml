@@ -17,15 +17,3 @@ rust-embed.workspace = true
 
 [lints]
 workspace = true
-
-[[example]]
-name = "logos"
-
-[[example]]
-name = "characters"
-
-[[example]]
-name = "controllers"
-
-[[example]]
-name = "buttons"

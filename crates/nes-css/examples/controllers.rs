@@ -5,9 +5,9 @@ use gpui::{
 
 use gpux_nes_css::controllers::{Nes, NesJp, Snes, SnesJp};
 
-struct Controllers {}
+struct Main {}
 
-impl Render for Controllers {
+impl Render for Main {
     fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex()
@@ -32,7 +32,7 @@ fn main() {
                 window_bounds: Some(WindowBounds::Windowed(bounds)),
                 ..Default::default()
             },
-            |cx| cx.new_view(|_cx| Controllers {}),
+            |cx| cx.new_view(|_cx| Main {}),
         ).unwrap();
     });
 }

@@ -7,9 +7,9 @@ use gpux_nes_css::logos::{
     Whatsapp, Youtube, Discord
 };
 
-struct Logos {}
+struct Main {}
 
-impl Render for Logos {
+impl Render for Main {
     fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex()
@@ -38,13 +38,13 @@ fn main() {
     let app = App::new();
 
     app.run(move |cx| {
-        let bounds = Bounds::centered(None, size(px(300.0), px(300.0)), cx);
+        let bounds = Bounds::centered(None, size(px(400.0), px(200.0)), cx);
         cx.open_window(
             WindowOptions {
                 window_bounds: Some(WindowBounds::Windowed(bounds)),
                 ..Default::default()
             },
-            |cx| cx.new_view(|_cx| Logos {}),
+            |cx| cx.new_view(|_cx| Main {}),
         ).unwrap();
     });
 }

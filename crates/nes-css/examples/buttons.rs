@@ -4,9 +4,9 @@ use gpui::{
 };
 use gpux_nes_css::button::Button;
 
-struct Buttons {}
+struct Main {}
 
-impl Render for Buttons {
+impl Render for Main {
     fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex()
@@ -28,7 +28,7 @@ fn main() {
                 window_bounds: Some(WindowBounds::Windowed(bounds)),
                 ..Default::default()
             },
-            |cx| cx.new_view(|_cx| Buttons {}),
+            |cx| cx.new_view(|_cx| Main {}),
         )
         .unwrap();
     });

@@ -5,9 +5,9 @@ use gpui::{
 
 use gpux_nes_css::characters::{Ash, Bulbasaur, Charmander, Kirby, Mario, Pokeball, Squirtle};
 
-struct Characters {}
+struct Main {}
 
-impl Render for Characters {
+impl Render for Main {
     fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex()
@@ -35,7 +35,7 @@ fn main() {
                 window_bounds: Some(WindowBounds::Windowed(bounds)),
                 ..Default::default()
             },
-            |cx| cx.new_view(|_cx| Characters {}),
+            |cx| cx.new_view(|_cx| Main {}),
         )
         .unwrap();
     });

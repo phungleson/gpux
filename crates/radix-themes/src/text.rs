@@ -1,8 +1,24 @@
-use gpui::{AnyElement, div, Div, FontWeight, IntoElement, ParentElement, Pixels, RenderOnce, Styled, WindowContext};
-use gpui::prelude::FluentBuilder;
-use smallvec::SmallVec;
-use gpux_theme::theme_mode::ThemeMode;
+// Copyright 2024 Phung Le Son.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://github.com/phungleson/gpux/blob/main/LICENSE-APACHE
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 use crate::theme::{AccentColor, Theme};
+use gpui::prelude::FluentBuilder;
+use gpui::{
+    div, AnyElement, FontWeight, IntoElement, ParentElement, Pixels, RenderOnce, Styled,
+    WindowContext,
+};
+use smallvec::SmallVec;
 
 #[derive(Copy, Clone, Default)]
 pub enum TextSize {
@@ -33,7 +49,6 @@ pub enum TextWrap {
     Wrap,
 }
 
-
 #[derive(IntoElement, Default)]
 pub struct Text {
     children: SmallVec<[AnyElement; 2]>,
@@ -45,7 +60,9 @@ pub struct Text {
 
 impl Text {
     pub fn new() -> Self {
-        Self { ..Default::default() }
+        Self {
+            ..Default::default()
+        }
     }
 
     pub fn size(mut self, size: TextSize) -> Self {
@@ -78,7 +95,7 @@ impl Text {
             TextSize::Six => theme.font_size.step_6(),
             TextSize::Seven => theme.font_size.step_7(),
             TextSize::Eight => theme.font_size.step_8(),
-            TextSize::Nine => theme.font_size.step_9()
+            TextSize::Nine => theme.font_size.step_9(),
         }
     }
 
@@ -92,7 +109,7 @@ impl Text {
 }
 
 impl ParentElement for Text {
-    fn extend(&mut self, elements: impl IntoIterator<Item=AnyElement>) {
+    fn extend(&mut self, elements: impl IntoIterator<Item = AnyElement>) {
         self.children.extend(elements)
     }
 }
@@ -107,19 +124,20 @@ impl RenderOnce for Text {
             .children(self.children);
 
         // Sets color
-        div = div.map(|this| {
-            match self.color {
-                Some(accent_color) => this.text_color(accent_color.theme_color(theme.theme_mode).transparent.step_11()),
-                None => this,
-            }
+        div = div.map(|this| match self.color {
+            Some(accent_color) => this.text_color(
+                accent_color
+                    .theme_color(theme.theme_mode)
+                    .transparent
+                    .step_11(),
+            ),
+            None => this,
         });
 
         // Sets wrap
-        div = div.map(|this| {
-            match self.wrap {
-                TextWrap::Nowrap => this.whitespace_nowrap(),
-                TextWrap::Wrap => this.whitespace_normal(),
-            }
+        div = div.map(|this| match self.wrap {
+            TextWrap::Nowrap => this.whitespace_nowrap(),
+            TextWrap::Wrap => this.whitespace_normal(),
         });
 
         div

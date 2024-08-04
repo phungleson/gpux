@@ -1,9 +1,25 @@
+// Copyright 2024 Phung Le Son.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://github.com/phungleson/gpux/blob/main/LICENSE-APACHE
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 use std::fmt;
 
-use gpui::{div, Div, InteractiveElement, Pixels, px, rems, Rems, StatefulInteractiveElement, Styled, Svg};
 use gpui::{
-    ElementId, IntoElement, ParentElement, prelude::FluentBuilder as _, RenderOnce, SharedString,
-    svg, WindowContext,
+    div, px, rems, Div, InteractiveElement, Pixels, Rems, StatefulInteractiveElement, Styled, Svg,
+};
+use gpui::{
+    prelude::FluentBuilder as _, svg, ElementId, IntoElement, ParentElement, RenderOnce,
+    SharedString, WindowContext,
 };
 use gpux_css::color::transparent_white;
 use gpux_css::stack_ext::StackExt;
@@ -50,7 +66,6 @@ pub enum CheckboxVariant {
     Surface,
     Soft,
 }
-
 
 #[derive(IntoElement)]
 pub struct Checkbox {
@@ -156,58 +171,70 @@ impl Checkbox {
     }
 
     fn render_check_div_variant(&self, theme: &Theme, div: Div) -> Div {
-        div
-            .map(|this| match self.checked {
-                Selection::Unselected => this
-                    .bg(match self.variant {
-                        CheckboxVariant::Soft => theme.accent(self.color).surface,
-                        CheckboxVariant::Classic => theme.accent(self.color).surface,
-                        CheckboxVariant::Surface => theme.accent(self.color).transparent.step_5(),
-                    })
-                    // TODO: use box-shadow
-                    .border_1()
-                    .border_color(
-                        match self.variant {
-                            CheckboxVariant::Soft => theme.gray().transparent.step_7(),
-                            // TODO: add shadow
-                            CheckboxVariant::Classic => theme.gray().transparent.step_7(),
-                            // Uses transparent white as border theme.accent(self.color).transparent.step_5() looks different from bg
-                            CheckboxVariant::Surface => transparent_white(),
-                        }
-                    )
-                ,
-                _ => this.bg(match self.variant {
-                    CheckboxVariant::Soft =>
-                        if self.high_contrast { theme.accent(self.color).solid.step_12() } else { theme.accent(self.color).indicator }
-                    CheckboxVariant::Classic =>
-                        if self.high_contrast { theme.accent(self.color).solid.step_12() } else { theme.accent(self.color).indicator },
-                    CheckboxVariant::Surface =>
-                        // TODO: check docs for high contrast surface
-                        if self.high_contrast { theme.accent(self.color).transparent.step_5() } else { theme.accent(self.color).transparent.step_5() },
+        div.map(|this| match self.checked {
+            Selection::Unselected => this
+                .bg(match self.variant {
+                    CheckboxVariant::Soft => theme.accent(self.color).surface,
+                    CheckboxVariant::Classic => theme.accent(self.color).surface,
+                    CheckboxVariant::Surface => theme.accent(self.color).transparent.step_5(),
+                })
+                // TODO: use box-shadow
+                .border_1()
+                .border_color(match self.variant {
+                    CheckboxVariant::Soft => theme.gray().transparent.step_7(),
+                    // TODO: add shadow
+                    CheckboxVariant::Classic => theme.gray().transparent.step_7(),
+                    // Uses transparent white as border theme.accent(self.color).transparent.step_5() looks different from bg
+                    CheckboxVariant::Surface => transparent_white(),
                 }),
-            })
-            .map(|this| match self.disabled {
-                true => this.bg(theme.gray().transparent.step_3()).border_1().border_color(theme.gray().transparent.step_6()),
-                _ => this,
-            })
+            _ => this.bg(match self.variant {
+                CheckboxVariant::Soft => {
+                    if self.high_contrast {
+                        theme.accent(self.color).solid.step_12()
+                    } else {
+                        theme.accent(self.color).indicator
+                    }
+                }
+                CheckboxVariant::Classic => {
+                    if self.high_contrast {
+                        theme.accent(self.color).solid.step_12()
+                    } else {
+                        theme.accent(self.color).indicator
+                    }
+                }
+                CheckboxVariant::Surface =>
+                // TODO: check docs for high contrast surface
+                {
+                    if self.high_contrast {
+                        theme.accent(self.color).transparent.step_5()
+                    } else {
+                        theme.accent(self.color).transparent.step_5()
+                    }
+                }
+            }),
+        })
+        .map(|this| match self.disabled {
+            true => this
+                .bg(theme.gray().transparent.step_3())
+                .border_1()
+                .border_color(theme.gray().transparent.step_6()),
+            _ => this,
+        })
     }
 
     fn render_svg_variant(&self, theme: &Theme, svg: Svg) -> Svg {
-        svg
-            .map(|this| match self.disabled {
-                true => this.text_color(theme.gray().transparent.step_8()),
-                _ => this.text_color(
-                    match self.variant {
-                        CheckboxVariant::Soft => theme.accent(self.color).contrast,
-                        CheckboxVariant::Classic => theme.accent(self.color).contrast,
-                        CheckboxVariant::Surface => theme.accent(self.color).transparent.step_11(),
-                    }
-                ),
-            })
-            .map(|this| match self.checked {
-                Selection::Selected => this.path(CheckboxIcon::Check.path()),
-                _ => this,
-            })
+        svg.map(|this| match self.disabled {
+            true => this.text_color(theme.gray().transparent.step_8()),
+            _ => this.text_color(match self.variant {
+                CheckboxVariant::Soft => theme.accent(self.color).contrast,
+                CheckboxVariant::Classic => theme.accent(self.color).contrast,
+                CheckboxVariant::Surface => theme.accent(self.color).transparent.step_11(),
+            }),
+        })
+        .map(|this| match self.checked {
+            Selection::Selected => this.path(CheckboxIcon::Check.path()),
+            _ => this,
+        })
     }
 }
 
@@ -252,7 +279,7 @@ impl RenderOnce for Checkbox {
                     // TODO: letter spacing
                     .text_color(theme.gray().solid.step_12())
                     .child(label.to_string()),
-                _ => this
+                _ => this,
             })
             .id(self.id)
             .when_some(
@@ -261,4 +288,3 @@ impl RenderOnce for Checkbox {
             )
     }
 }
-

@@ -20,10 +20,10 @@ use gpui::{
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
 use gpux_radix_themes::{assets::Assets, theme::Theme};
-use gpux_radix_themes::text::text;
+use gpux_radix_themes::blockquote::blockquote;
 use gpux_radix_themes::theme::{AccentColor, GrayColor};
 use gpux_radix_themes::typography::{Size, Weight};
-use gpux_radix_themes::typography::Wrap::Wrap;
+use gpux_radix_themes::typography::Wrap;
 use gpux_theme::theme_mode::ThemeMode;
 
 struct Main {}
@@ -42,49 +42,49 @@ impl Render for Main {
                         .stack_v()
                         .gap_2()
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::One)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Two)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Three)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Four)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Five)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Six)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Seven)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Eight)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .size(Size::Nine)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         ),
                 ),
             )
@@ -94,19 +94,19 @@ impl Render for Main {
                         .stack_v()
                         .gap_2()
                         .child(
-                            text()
+                            blockquote()
                                 .weight(Weight::Regular)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .weight(Weight::Medium)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .weight(Weight::Bold)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         ),
                 ),
             )
@@ -116,14 +116,14 @@ impl Render for Main {
                         .stack_v()
                         .gap_2()
                         .child(
-                            text()
+                            blockquote()
                                 .wrap(Wrap::Nowrap)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .wrap(Wrap::Wrap)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         ),
                 ),
             )
@@ -133,24 +133,24 @@ impl Render for Main {
                         .stack_v()
                         .gap_2()
                         .child(
-                            text()
+                            blockquote()
                                 .color(AccentColor::Indigo)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .color(AccentColor::Cyan)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .color(AccentColor::Orange)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         )
                         .child(
-                            text()
+                            blockquote()
                                 .color(AccentColor::Crimson)
-                                .child("The quick brown fox jumps over the lazy dog."),
+                                .child("Perfect typography is certainly the most elusive of all arts. Sculpture in stone alone comes near it in obstinacy."),
                         ),
                 ),
             )

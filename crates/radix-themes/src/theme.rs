@@ -173,7 +173,6 @@ impl ThemeColor {
 
 #[derive(Default)]
 pub struct Theme {
-    // pub font_size: f32,
     pub(crate) font_family: SharedString,
     pub(crate) theme_mode: ThemeMode,
     // Accent theme colors

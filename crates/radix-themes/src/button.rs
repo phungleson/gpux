@@ -345,3 +345,7 @@ impl RenderOnce for Button {
         element
     }
 }
+
+pub fn button(id: impl Into<ElementId>) -> Button {
+    Button::new(id)
+}

@@ -20,7 +20,7 @@ use gpui::{
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
 use gpux_radix_themes::{assets::Assets, theme::Theme};
-use gpux_radix_themes::button::{Button, ButtonRadius, ButtonSize, ButtonVariant};
+use gpux_radix_themes::button::{button, ButtonRadius, ButtonSize, ButtonVariant};
 use gpux_radix_themes::checkbox::CheckboxIcon;
 use gpux_radix_themes::theme::{AccentColor, GrayColor};
 use gpux_theme::theme_mode::ThemeMode;
@@ -40,26 +40,14 @@ impl Render for Main {
                     div()
                         .stack_h()
                         .gap_2()
+                        .child(button("one").size(ButtonSize::One).label("Edit profile"))
+                        .child(button("two").size(ButtonSize::Two).label("Edit profile"))
                         .child(
-                            Button::new("one")
-                                .size(ButtonSize::One)
-                                .label("Edit profile"),
-                        )
-                        .child(
-                            Button::new("two")
-                                .size(ButtonSize::Two)
-                                .label("Edit profile"),
-                        )
-                        .child(
-                            Button::new("three")
+                            button("three")
                                 .size(ButtonSize::Three)
                                 .label("Edit profile"),
                         )
-                        .child(
-                            Button::new("four")
-                                .size(ButtonSize::Four)
-                                .label("Edit profile"),
-                        ),
+                        .child(button("four").size(ButtonSize::Four).label("Edit profile")),
                 ),
             )
             .child(
@@ -68,27 +56,27 @@ impl Render for Main {
                         .stack_h()
                         .gap_2()
                         .child(
-                            Button::new("classic")
+                            button("classic")
                                 .variant(ButtonVariant::Classic)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("solid")
+                            button("solid")
                                 .variant(ButtonVariant::Solid)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("soft")
+                            button("soft")
                                 .variant(ButtonVariant::Soft)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("surface")
+                            button("surface")
                                 .variant(ButtonVariant::Surface)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("outline")
+                            button("outline")
                                 .variant(ButtonVariant::Outline)
                                 .label("Edit profile"),
                         ),
@@ -100,25 +88,25 @@ impl Render for Main {
                         .stack_h()
                         .gap_2()
                         .child(
-                            Button::new("indigo")
+                            button("indigo")
                                 .color(AccentColor::Indigo)
                                 .variant(ButtonVariant::Soft)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("cyan")
+                            button("cyan")
                                 .color(AccentColor::Cyan)
                                 .variant(ButtonVariant::Soft)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("orange")
+                            button("orange")
                                 .color(AccentColor::Orange)
                                 .variant(ButtonVariant::Soft)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("crimson")
+                            button("crimson")
                                 .color(AccentColor::Crimson)
                                 .variant(ButtonVariant::Soft)
                                 .label("Edit profile"),
@@ -131,31 +119,31 @@ impl Render for Main {
                         .stack_h()
                         .gap_2()
                         .child(
-                            Button::new("none")
+                            button("none")
                                 .variant(ButtonVariant::Soft)
                                 .radius(ButtonRadius::None)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("small")
+                            button("small")
                                 .variant(ButtonVariant::Soft)
                                 .radius(ButtonRadius::Small)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("medium")
+                            button("medium")
                                 .variant(ButtonVariant::Soft)
                                 .radius(ButtonRadius::Medium)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("large")
+                            button("large")
                                 .variant(ButtonVariant::Soft)
                                 .radius(ButtonRadius::Large)
                                 .label("Edit profile"),
                         )
                         .child(
-                            Button::new("full")
+                            button("full")
                                 .variant(ButtonVariant::Soft)
                                 .radius(ButtonRadius::Full)
                                 .label("Edit profile"),
@@ -165,7 +153,7 @@ impl Render for Main {
             .child(
                 div().child("With icons").child(
                     div().stack_h().gap_2().child(
-                        Button::new("soft")
+                        button("soft")
                             .variant(ButtonVariant::Soft)
                             .icon(svg().path(CheckboxIcon::Check.path()))
                             .label("Edit profile"),
@@ -174,17 +162,16 @@ impl Render for Main {
             )
             .child(
                 div().child("Loading").child(
-                    div().stack_h().gap_2().child(
-                        Button::new("loading")
-                            .variant(ButtonVariant::Soft)
-                            .loading(true),
-                    ),
+                    div()
+                        .stack_h()
+                        .gap_2()
+                        .child(button("loading").variant(ButtonVariant::Soft).loading(true)),
                 ),
             )
             .child(
                 div().child("Disabled").child(
                     div().stack_h().gap_2().child(
-                        Button::new("soft")
+                        button("soft")
                             .variant(ButtonVariant::Soft)
                             .disabled(true)
                             .icon(svg().path(CheckboxIcon::Check.path()))

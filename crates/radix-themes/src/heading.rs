@@ -22,7 +22,7 @@ use smallvec::SmallVec;
 use crate::theme::{AccentColor, Theme};
 
 #[derive(Copy, Clone, Default)]
-pub enum TextSize {
+pub enum HeadingSize {
     One,
     Two,
     #[default]
@@ -36,7 +36,8 @@ pub enum TextSize {
 }
 
 #[derive(Copy, Clone, Default)]
-pub enum TextWeight {
+pub enum HeadingWeight {
+    Light,
     #[default]
     Regular,
     Medium,
@@ -44,35 +45,35 @@ pub enum TextWeight {
 }
 
 #[derive(Copy, Clone, Default)]
-pub enum TextWrap {
+pub enum HeadingWrap {
     #[default]
     Nowrap,
     Wrap,
 }
 
 #[derive(IntoElement, Default)]
-pub struct Text {
+pub struct Heading {
     children: SmallVec<[AnyElement; 2]>,
-    size: TextSize,
-    weight: TextWeight,
-    wrap: TextWrap,
+    size: HeadingSize,
+    weight: HeadingWeight,
+    wrap: HeadingWrap,
     color: Option<AccentColor>,
     high_contrast: bool,
 }
 
-impl Text {
+impl Heading {
     pub fn new() -> Self {
         Self {
             ..Default::default()
         }
     }
 
-    pub fn size(mut self, size: TextSize) -> Self {
+    pub fn size(mut self, size: HeadingSize) -> Self {
         self.size = size;
         self
     }
 
-    pub fn weight(mut self, weight: TextWeight) -> Self {
+    pub fn weight(mut self, weight: HeadingWeight) -> Self {
         self.weight = weight;
         self
     }
@@ -82,41 +83,42 @@ impl Text {
         self
     }
 
-    pub fn wrap(mut self, wrap: TextWrap) -> Self {
+    pub fn wrap(mut self, wrap: HeadingWrap) -> Self {
         self.wrap = wrap;
         self
     }
 
     fn render_text_size(&self, theme: &Theme) -> Pixels {
         match self.size {
-            TextSize::One => theme.font_size.step_1(),
-            TextSize::Two => theme.font_size.step_2(),
-            TextSize::Three => theme.font_size.step_3(),
-            TextSize::Four => theme.font_size.step_4(),
-            TextSize::Five => theme.font_size.step_5(),
-            TextSize::Six => theme.font_size.step_6(),
-            TextSize::Seven => theme.font_size.step_7(),
-            TextSize::Eight => theme.font_size.step_8(),
-            TextSize::Nine => theme.font_size.step_9(),
+            HeadingSize::One => theme.font_size.step_1(),
+            HeadingSize::Two => theme.font_size.step_2(),
+            HeadingSize::Three => theme.font_size.step_3(),
+            HeadingSize::Four => theme.font_size.step_4(),
+            HeadingSize::Five => theme.font_size.step_5(),
+            HeadingSize::Six => theme.font_size.step_6(),
+            HeadingSize::Seven => theme.font_size.step_7(),
+            HeadingSize::Eight => theme.font_size.step_8(),
+            HeadingSize::Nine => theme.font_size.step_9(),
         }
     }
 
     fn render_font_weight(&self, theme: &Theme) -> FontWeight {
         match self.weight {
-            TextWeight::Regular => theme.font_weight_regular,
-            TextWeight::Medium => theme.font_weight_medium,
-            TextWeight::Bold => theme.font_weight_bold,
+            HeadingWeight::Light => theme.font_weight_light,
+            HeadingWeight::Regular => theme.font_weight_regular,
+            HeadingWeight::Medium => theme.font_weight_medium,
+            HeadingWeight::Bold => theme.font_weight_bold,
         }
     }
 }
 
-impl ParentElement for Text {
+impl ParentElement for Heading {
     fn extend(&mut self, elements: impl IntoIterator<Item = AnyElement>) {
         self.children.extend(elements)
     }
 }
 
-impl RenderOnce for Text {
+impl RenderOnce for Heading {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
         let theme = cx.global::<Theme>();
 
@@ -124,6 +126,7 @@ impl RenderOnce for Text {
             .text_size(self.render_text_size(theme))
             .font_weight(self.render_font_weight(theme))
             .children(self.children)
+            // Sets color
             .map(|this| match self.color {
                 Some(accent_color) => this.text_color(
                     accent_color
@@ -134,12 +137,12 @@ impl RenderOnce for Text {
                 None => this,
             })
             .map(|this| match self.wrap {
-                TextWrap::Nowrap => this.whitespace_nowrap(),
-                TextWrap::Wrap => this.whitespace_normal(),
+                HeadingWrap::Nowrap => this.whitespace_nowrap(),
+                HeadingWrap::Wrap => this.whitespace_normal(),
             })
     }
 }
 
-pub fn text() -> Text {
-    Text::new()
+pub fn heading() -> Heading {
+    Heading::new()
 }

@@ -15,6 +15,7 @@
 pub mod assets;
 pub mod button;
 pub mod checkbox;
+pub mod heading;
 pub mod icon;
 pub mod text;
 pub mod theme;

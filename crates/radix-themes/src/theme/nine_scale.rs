@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/// A collection of colors that are used to style the UI.
-///
-/// Each step has a semantic meaning, and is used to style different parts of the UI.
+/// Step of a nine-scaled collection.
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Clone, Copy)]
 pub struct NineScaleStep(usize);
 

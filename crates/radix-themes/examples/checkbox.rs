@@ -13,16 +13,16 @@
 // limitations under the License.
 
 use gpui::{
-    div, px, size, App, Bounds, IntoElement, ParentElement, Render, Styled, ViewContext,
+    App, Bounds, div, IntoElement, ParentElement, px, Render, size, Styled, ViewContext,
     VisualContext, WindowBounds, WindowOptions,
 };
 
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
 use gpux_interactivity::{disableable::Disableable, selection::Selection};
+use gpux_radix_themes::{assets::Assets, checkbox::Checkbox, theme::Theme};
 use gpux_radix_themes::checkbox::{CheckboxSize, CheckboxVariant};
 use gpux_radix_themes::theme::{AccentColor, GrayColor};
-use gpux_radix_themes::{assets::Assets, checkbox::Checkbox, theme::Theme};
 use gpux_theme::theme_mode::ThemeMode;
 
 struct Main {

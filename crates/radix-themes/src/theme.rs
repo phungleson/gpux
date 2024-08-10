@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{px, rems, rgba, FontWeight, Global, Hsla, Pixels, Rems, SharedString};
+use gpui::{FontWeight, Global, Hsla, Pixels, px, rems, Rems, rgba, SharedString};
 use once_cell::sync::Lazy;
 
 use gpux_css::color::{hsla, white};
@@ -20,9 +20,11 @@ use gpux_radix_colors::color_scale::ColorScale;
 use gpux_radix_colors::color_scales::{color_scales, ColorScales};
 use gpux_theme::theme_mode::ThemeMode;
 
-use crate::theme::scale::NineScale;
+use crate::theme::nine_scale::NineScale;
+use crate::theme::six_scale::SixScale;
 
-mod scale;
+mod nine_scale;
+mod six_scale;
 
 static COLOR_SCALES: Lazy<ColorScales> = Lazy::new(color_scales);
 
@@ -81,7 +83,7 @@ pub enum GrayColor {
 }
 
 #[derive(Default)]
-pub(crate) struct ThemeColor {
+pub struct ThemeColor {
     pub solid: ColorScale,
     pub transparent: ColorScale,
 
@@ -93,7 +95,7 @@ pub(crate) struct ThemeColor {
 }
 
 impl ThemeColor {
-    pub(crate) fn slate(theme_mode: ThemeMode) -> Self {
+    pub fn slate(theme_mode: ThemeMode) -> Self {
         let slate = COLOR_SCALES.slate.color_scale(theme_mode);
         let slate_alpha = COLOR_SCALES.slate.color_scale_alpha(theme_mode);
 
@@ -108,7 +110,7 @@ impl ThemeColor {
         }
     }
 
-    pub(crate) fn indigo(theme_mode: ThemeMode) -> Self {
+    pub fn indigo(theme_mode: ThemeMode) -> Self {
         let indigo = COLOR_SCALES.indigo.color_scale(theme_mode);
         let indigo_alpha = COLOR_SCALES.indigo.color_scale_alpha(theme_mode);
 
@@ -123,7 +125,7 @@ impl ThemeColor {
         }
     }
 
-    pub(crate) fn cyan(theme_mode: ThemeMode) -> Self {
+    pub fn cyan(theme_mode: ThemeMode) -> Self {
         let cyan = COLOR_SCALES.cyan.color_scale(theme_mode);
         let cyan_alpha = COLOR_SCALES.cyan.color_scale_alpha(theme_mode);
 
@@ -138,7 +140,7 @@ impl ThemeColor {
         }
     }
 
-    pub(crate) fn orange(theme_mode: ThemeMode) -> Self {
+    pub fn orange(theme_mode: ThemeMode) -> Self {
         let orange = COLOR_SCALES.orange.color_scale(theme_mode);
         let orange_alpha = COLOR_SCALES.orange.color_scale_alpha(theme_mode);
 
@@ -153,7 +155,7 @@ impl ThemeColor {
         }
     }
 
-    pub(crate) fn crimson(theme_mode: ThemeMode) -> Self {
+    pub fn crimson(theme_mode: ThemeMode) -> Self {
         let crimson = COLOR_SCALES.crimson.color_scale(theme_mode);
         let crimson_alpha = COLOR_SCALES.crimson.color_scale_alpha(theme_mode);
 
@@ -184,6 +186,7 @@ pub struct Theme {
 
     pub(crate) font_size: NineScale<Pixels>,
     pub(crate) space: NineScale<Pixels>,
+    pub(crate) radius: SixScale<Pixels>,
     pub(crate) line_height: NineScale<Pixels>,
     pub(crate) letter_spacing: NineScale<Rems>,
     pub(crate) font_weight_light: FontWeight,
@@ -224,6 +227,14 @@ impl Theme {
                 px(40.) * scaling,
                 px(48.) * scaling,
                 px(64.) * scaling,
+            ]),
+            radius: SixScale([
+                px(3.) * scaling,
+                px(4.) * scaling,
+                px(6.) * scaling,
+                px(8.) * scaling,
+                px(12.) * scaling,
+                px(16.) * scaling,
             ]),
             font_size: NineScale([
                 px(12.) * scaling,
@@ -283,7 +294,7 @@ impl Theme {
         }
     }
 
-    pub(crate) fn accent(&self, color: Option<AccentColor>) -> &ThemeColor {
+    pub fn accent(&self, color: Option<AccentColor>) -> &ThemeColor {
         let accent_color = color.unwrap_or(self.accent_color);
 
         match accent_color {
@@ -295,7 +306,7 @@ impl Theme {
         }
     }
 
-    pub(crate) fn gray(&self) -> &ThemeColor {
+    pub fn gray(&self) -> &ThemeColor {
         match &self.gray_color {
             &GrayColor::Slate => &self.slate,
             _ => &self.slate,

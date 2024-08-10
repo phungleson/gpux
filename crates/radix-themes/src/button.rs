@@ -61,6 +61,7 @@ pub struct Button {
     color: Option<AccentColor>,
     high_contrast: bool,
     loading: bool,
+    disabled: bool,
     radius: Option<ButtonRadius>,
     size: ButtonSize,
     label: Option<SharedString>,
@@ -76,6 +77,7 @@ impl Button {
             color: Default::default(),
             high_contrast: Default::default(),
             loading: Default::default(),
+            disabled: Default::default(),
             radius: Default::default(),
             size: Default::default(),
             label: Default::default(),
@@ -196,15 +198,19 @@ impl Button {
     }
 
     fn render_text_color(&self, theme: &Theme) -> Hsla {
-        match self.variant {
-            // TODO: classic
-            ButtonVariant::Classic => theme.accent(self.color).contrast,
-            ButtonVariant::Solid => theme.accent(self.color).contrast,
-            ButtonVariant::Soft => theme.accent(self.color).transparent.step_11(),
-            // TODO: surface, box-shadow
-            ButtonVariant::Surface => theme.accent(self.color).transparent.step_11(),
-            ButtonVariant::Outline => theme.accent(self.color).transparent.step_11(),
-            ButtonVariant::Ghost => theme.accent(self.color).transparent.step_11(),
+        if self.disabled {
+            self.render_disabled_text_color(theme)
+        } else {
+            match self.variant {
+                // TODO: classic
+                ButtonVariant::Classic => theme.accent(self.color).contrast,
+                ButtonVariant::Solid => theme.accent(self.color).contrast,
+                ButtonVariant::Soft => theme.accent(self.color).transparent.step_11(),
+                // TODO: surface, box-shadow
+                ButtonVariant::Surface => theme.accent(self.color).transparent.step_11(),
+                ButtonVariant::Outline => theme.accent(self.color).transparent.step_11(),
+                ButtonVariant::Ghost => theme.accent(self.color).transparent.step_11(),
+            }
         }
     }
 
@@ -221,7 +227,7 @@ impl Button {
         }
     }
 
-    fn render_loading_background(&self, theme: &Theme) -> Hsla {
+    fn render_disabled_background(&self, theme: &Theme) -> Hsla {
         match self.variant {
             // TODO: classic
             ButtonVariant::Classic
@@ -234,16 +240,7 @@ impl Button {
     }
 
     fn render_disabled_text_color(&self, theme: &Theme) -> Hsla {
-        match self.variant {
-            // TODO: classic
-            ButtonVariant::Classic => theme.gray().transparent.step_2(),
-            ButtonVariant::Solid => theme.gray().transparent.step_8(),
-            ButtonVariant::Soft => theme.gray().transparent.step_8(),
-            // TODO: surface, box-shadow
-            ButtonVariant::Surface => theme.gray().transparent.step_8(),
-            ButtonVariant::Outline => theme.accent(self.color).transparent.step_11(),
-            ButtonVariant::Ghost => theme.accent(self.color).transparent.step_11(),
-        }
+        theme.gray().transparent.step_8()
     }
 }
 
@@ -277,12 +274,18 @@ impl RenderOnce for Button {
                 ButtonVariant::Ghost => transparent_white(),
             });
 
+        if self.disabled {
+            element = element
+                .cursor(CursorStyle::OperationNotAllowed)
+                .bg(self.render_disabled_background(theme));
+        }
+
         if self.loading {
             element = element
                 .cursor(CursorStyle::OperationNotAllowed)
-                .text_color(theme.gray().transparent.step_8())
+                .text_color(self.render_disabled_text_color(theme))
                 .px(theme.space.step_3())
-                .bg(self.render_loading_background(theme));
+                .bg(self.render_disabled_background(theme));
         } else {
             if let Some(icon) = self.icon {
                 element = element.child(icon.size_3().text_color(text_color));

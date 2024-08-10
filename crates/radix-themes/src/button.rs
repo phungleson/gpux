@@ -13,11 +13,13 @@
 // limitations under the License.
 
 use gpui::{
-    CursorStyle, div, ElementId, Hsla, IntoElement, ParentElement, Pixels, px, rems, Rems,
-    RenderOnce, SharedString, Styled, Svg, WindowContext,
+    CursorStyle, div, ElementId, Hsla, InteractiveElement, IntoElement, ParentElement, Pixels, px,
+    rems, Rems, RenderOnce, SharedString, StatefulInteractiveElement, Styled, Svg, WindowContext,
 };
+use gpui::prelude::FluentBuilder;
 
 use gpux_css::color::transparent_white;
+use gpux_css::hsla_ext::HslaExt;
 use gpux_css::stack_ext::StackExt;
 
 use crate::theme::{AccentColor, Theme};
@@ -106,6 +108,11 @@ impl Button {
         self
     }
 
+    pub fn disabled(mut self, disabled: bool) -> Self {
+        self.disabled = disabled;
+        self
+    }
+
     pub fn variant(mut self, variant: ButtonVariant) -> Self {
         self.variant = variant;
         self
@@ -144,7 +151,7 @@ impl Button {
     }
 
     fn render_border_radius(&self, theme: &Theme) -> Pixels {
-        match &self.radius {
+        match self.radius.as_ref() {
             None => match self.size {
                 ButtonSize::One => theme.radius.step_1(),
                 ButtonSize::Two => theme.radius.step_2(),
@@ -158,6 +165,17 @@ impl Button {
                 ButtonRadius::Large => theme.radius.step_2() * 1.5,
                 ButtonRadius::Full => Pixels(9999.),
             },
+        }
+    }
+
+    fn render_border_color(&self, theme: &Theme) -> Hsla {
+        match self.variant {
+            ButtonVariant::Classic => theme.gray().transparent.step_7(),
+            ButtonVariant::Solid => transparent_white(),
+            ButtonVariant::Soft => transparent_white(),
+            ButtonVariant::Surface => theme.gray().transparent.step_7(),
+            ButtonVariant::Outline => transparent_white(),
+            ButtonVariant::Ghost => transparent_white(),
         }
     }
 
@@ -198,19 +216,23 @@ impl Button {
     }
 
     fn render_text_color(&self, theme: &Theme) -> Hsla {
+        match self.variant {
+            // TODO: classic
+            ButtonVariant::Classic => theme.accent(self.color).contrast,
+            ButtonVariant::Solid => theme.accent(self.color).contrast,
+            ButtonVariant::Soft => theme.accent(self.color).transparent.step_11(),
+            // TODO: surface, box-shadow
+            ButtonVariant::Surface => theme.accent(self.color).transparent.step_11(),
+            ButtonVariant::Outline => theme.accent(self.color).transparent.step_11(),
+            ButtonVariant::Ghost => theme.accent(self.color).transparent.step_11(),
+        }
+    }
+
+    fn render_icon_color(&self, theme: &Theme) -> Hsla {
         if self.disabled {
             self.render_disabled_text_color(theme)
         } else {
-            match self.variant {
-                // TODO: classic
-                ButtonVariant::Classic => theme.accent(self.color).contrast,
-                ButtonVariant::Solid => theme.accent(self.color).contrast,
-                ButtonVariant::Soft => theme.accent(self.color).transparent.step_11(),
-                // TODO: surface, box-shadow
-                ButtonVariant::Surface => theme.accent(self.color).transparent.step_11(),
-                ButtonVariant::Outline => theme.accent(self.color).transparent.step_11(),
-                ButtonVariant::Ghost => theme.accent(self.color).transparent.step_11(),
-            }
+            self.render_text_color(theme)
         }
     }
 
@@ -224,6 +246,37 @@ impl Button {
             ButtonVariant::Surface => theme.accent(self.color).surface,
             ButtonVariant::Outline => transparent_white(),
             ButtonVariant::Ghost => transparent_white(),
+        }
+    }
+
+    fn render_hovered_background(&self, theme: &Theme) -> Hsla {
+        match self.variant {
+            // TODO: classic
+            ButtonVariant::Classic => theme.accent(self.color).transparent.step_10(),
+            ButtonVariant::Solid => theme.accent(self.color).transparent.step_10(),
+            ButtonVariant::Soft => theme.accent(self.color).transparent.step_4(),
+            // TODO: surface, box-shadow
+            ButtonVariant::Surface => theme.accent(self.color).surface,
+            ButtonVariant::Outline => transparent_white(),
+            ButtonVariant::Ghost => theme.accent(self.color).transparent.step_2(),
+        }
+    }
+
+    fn render_active_background(&self, theme: &Theme) -> Hsla {
+        match self.variant {
+            // TODO: classic
+            ButtonVariant::Classic => theme.accent(self.color).transparent.step_10(),
+            ButtonVariant::Solid => theme
+                .accent(self.color)
+                .transparent
+                .step_10()
+                .brightness(0.92)
+                .saturate(1.1),
+            ButtonVariant::Soft => theme.accent(self.color).transparent.step_5(),
+            // TODO: surface, box-shadow
+            ButtonVariant::Surface => theme.accent(self.color).transparent.step_3(),
+            ButtonVariant::Outline => theme.accent(self.color).transparent.step_3(),
+            ButtonVariant::Ghost => theme.accent(self.color).transparent.step_2(),
         }
     }
 
@@ -265,30 +318,24 @@ impl RenderOnce for Button {
             // TODO: letter spacing
             // TODO: use box-shadow for border
             .border_1()
-            .border_color(match self.variant {
-                ButtonVariant::Classic => theme.gray().transparent.step_7(),
-                ButtonVariant::Solid => transparent_white(),
-                ButtonVariant::Soft => transparent_white(),
-                ButtonVariant::Surface => theme.gray().transparent.step_7(),
-                ButtonVariant::Outline => transparent_white(),
-                ButtonVariant::Ghost => transparent_white(),
+            .border_color(self.render_border_color(theme))
+            .when(self.disabled || self.loading, |this| {
+                this.cursor(CursorStyle::OperationNotAllowed)
+                    .text_color(self.render_disabled_text_color(theme))
+                    .bg(self.render_disabled_background(theme))
+            })
+            .when(self.loading, |this| this.px(theme.space.step_3()))
+            // We need Stateful<Div> for active state
+            .id(self.id.clone())
+            .when(!(self.disabled || self.loading), |this| {
+                this.hover(|style| style.bg(self.render_hovered_background(theme)))
+                    .active(|style| style.bg(self.render_active_background(theme)))
             });
 
-        if self.disabled {
-            element = element
-                .cursor(CursorStyle::OperationNotAllowed)
-                .bg(self.render_disabled_background(theme));
-        }
-
-        if self.loading {
-            element = element
-                .cursor(CursorStyle::OperationNotAllowed)
-                .text_color(self.render_disabled_text_color(theme))
-                .px(theme.space.step_3())
-                .bg(self.render_disabled_background(theme));
-        } else {
+        if !self.loading {
+            let icon_color = self.render_icon_color(theme);
             if let Some(icon) = self.icon {
-                element = element.child(icon.size_3().text_color(text_color));
+                element = element.child(icon.size_3().text_color(icon_color));
             }
             if let Some(label) = self.label {
                 element = element.child(div().pt(label_padding_top).child(label));

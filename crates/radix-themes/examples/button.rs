@@ -181,6 +181,17 @@ impl Render for Main {
                     ),
                 ),
             )
+            .child(
+                div().child("Disabled").child(
+                    div().stack_h().gap_2().child(
+                        Button::new("soft")
+                            .variant(ButtonVariant::Soft)
+                            .disabled(true)
+                            .icon(svg().path(CheckboxIcon::Check.path()))
+                            .label("Bookmark"),
+                    ),
+                ),
+            )
     }
 }
 

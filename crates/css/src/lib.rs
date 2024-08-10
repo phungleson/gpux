@@ -14,4 +14,5 @@
 
 pub mod box_shadow;
 pub mod color;
+pub mod hsla_ext;
 pub mod stack_ext;

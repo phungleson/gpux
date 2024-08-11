@@ -19,6 +19,8 @@ pub use code::*;
 pub use em::*;
 pub use heading::*;
 pub use kbd::*;
+pub use link::*;
+pub use strong::*;
 pub use text::*;
 
 use crate::theme::{AccentColor, Theme};
@@ -28,6 +30,8 @@ mod code;
 mod em;
 mod heading;
 mod kbd;
+mod link;
+mod strong;
 mod text;
 
 #[derive(Default)]

@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{
-    div, IntoElement, ParentElement, Render, Styled, ViewContext,
-    VisualContext,
-};
+use gpui::{div, IntoElement, ParentElement, Render, Styled, ViewContext};
 
 use gpux_css::color::white;
 use gpux_radix_themes::typography::strong;
-use gpux_radix_themes::typography::text;
 
 use crate::app::run_app;
 
@@ -36,14 +32,9 @@ impl Render for Main {
             .bg(white())
             .size_full()
             .child(
-                div().child("Em").child(
-                    div().child(
-                        text()
-                            .child("We ")
-                            .child(strong().child("had"))
-                            .child(" to do something about it."),
-                    ),
-                ),
+                div()
+                    .child("Strong")
+                    .child(div().child(strong().child("The goal of typography is to relate font"))),
             )
     }
 }

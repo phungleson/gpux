@@ -14,7 +14,21 @@
 
 use gpui::{Div, FontWeight, Styled};
 
+pub use blockquote::*;
+pub use code::*;
+pub use em::*;
+pub use heading::*;
+pub use kbd::*;
+pub use text::*;
+
 use crate::theme::{AccentColor, Theme};
+
+mod blockquote;
+mod code;
+mod em;
+mod heading;
+mod kbd;
+mod text;
 
 #[derive(Default)]
 pub(crate) struct TypographyStyle {

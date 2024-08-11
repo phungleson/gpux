@@ -13,18 +13,20 @@
 // limitations under the License.
 
 use gpui::{
-    App, Bounds, div, IntoElement, ParentElement, px, Render, size, Styled, ViewContext,
-    VisualContext, WindowBounds, WindowOptions,
+    div, IntoElement, ParentElement, Render, Styled, ViewContext,
+    VisualContext,
 };
 
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
-use gpux_radix_themes::{assets::Assets, theme::Theme};
-use gpux_radix_themes::text::text;
-use gpux_radix_themes::theme::{AccentColor, GrayColor};
+use gpux_radix_themes::theme::AccentColor;
 use gpux_radix_themes::typography::{Size, Weight};
+use gpux_radix_themes::typography::text;
 use gpux_radix_themes::typography::Wrap::Wrap;
-use gpux_theme::theme_mode::ThemeMode;
+
+use crate::app::run_app;
+
+mod app;
 
 struct Main {}
 
@@ -158,22 +160,5 @@ impl Render for Main {
 }
 
 fn main() {
-    let app = App::new().with_assets(Assets);
-
-    app.run(move |cx| {
-        cx.set_global(Theme::new(
-            ThemeMode::Light,
-            AccentColor::Indigo,
-            GrayColor::Slate,
-        ));
-        let bounds = Bounds::centered(None, size(px(300.0), px(300.0)), cx);
-        cx.open_window(
-            WindowOptions {
-                window_bounds: Some(WindowBounds::Windowed(bounds)),
-                ..Default::default()
-            },
-            |cx| cx.new_view(|_cx| Main {}),
-        )
-        .unwrap();
-    });
+    run_app(|_cx| Main {});
 }

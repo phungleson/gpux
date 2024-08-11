@@ -13,14 +13,7 @@
 // limitations under the License.
 
 pub mod assets;
-pub mod blockquote;
-pub mod button;
-pub mod checkbox;
-pub mod code;
-pub mod em;
-pub mod heading;
+pub mod components;
 pub mod icon;
-pub mod kbd;
-pub mod text;
 pub mod theme;
 pub mod typography;

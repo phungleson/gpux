@@ -17,7 +17,7 @@ use once_cell::sync::Lazy;
 
 use gpux_css::color::{hsla, white};
 use gpux_radix_colors::color_scale::ColorScale;
-use gpux_radix_colors::color_scales::{color_scales, ColorScales, StaticColorScale};
+use gpux_radix_colors::color_scales::{color_scales, ColorScales};
 use gpux_theme::theme_mode::ThemeMode;
 
 use crate::theme::nine_scale::NineScale;

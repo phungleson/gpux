@@ -103,7 +103,7 @@ impl Code {
         }
     }
 
-    fn border_radius<'a>(&'a self, theme: &'a Theme, rem_size: Pixels) -> Pixels {
+    fn border_radius(&self, rem_size: Pixels) -> Pixels {
         px(0.5) + rems(0.2).to_pixels(rem_size)
     }
 }
@@ -120,7 +120,7 @@ impl RenderOnce for Code {
 
         div()
             .font_weight(self.style.font_weight(theme))
-            .rounded(self.border_radius(theme, cx.rem_size()))
+            .rounded(self.border_radius(cx.rem_size()))
             .px(rems(0.25))
             .py(rems(0.1))
             .map(self.style.map_size(theme))

@@ -21,9 +21,3 @@ smallvec.workspace = true
 
 [lints]
 workspace = true
-
-[[example]]
-name = "checkbox"
-
-[[example]]
-name = "text"

@@ -29,7 +29,7 @@ use gpux_theme::theme_mode::ThemeMode;
 struct Main {}
 
 impl Render for Main {
-    fn render(&mut self, cx: &mut ViewContext<Self>) -> impl IntoElement {
+    fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
         div()
             .flex_col()
             .p_4()

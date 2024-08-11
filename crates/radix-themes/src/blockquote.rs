@@ -67,8 +67,8 @@ impl RenderOnce for Blockquote {
         let theme = cx.global::<Theme>();
 
         div()
-            .text_size(self.style.font_size(theme))
             .font_weight(self.style.font_weight(theme))
+            .map(self.style.map_size(theme))
             .map(self.style.map_text_color(theme))
             .map(self.style.map_whitespace())
             .border_l(

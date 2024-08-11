@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{Div, FontWeight, Pixels, Styled};
+use gpui::{Div, FontWeight, Styled};
 
 use crate::theme::{AccentColor, Theme};
 
@@ -26,7 +26,7 @@ pub(crate) struct TypographyStyle {
 }
 
 impl TypographyStyle {
-    pub(crate) fn map_text_color<'a>(&'a self, theme: &'a Theme) -> impl Fn(Div) -> Div + 'a {
+    pub(crate) fn map_text_color<'a>(&'a self, theme: &'a Theme) -> impl Fn(Div) -> Div + '_ {
         |div| match self.color {
             Some(accent_color) => div.text_color(
                 accent_color
@@ -38,17 +38,35 @@ impl TypographyStyle {
         }
     }
 
-    pub(crate) fn font_size(&self, theme: &Theme) -> Pixels {
-        match self.size {
-            Size::One => theme.font_size.step_1(),
-            Size::Two => theme.font_size.step_2(),
-            Size::Three => theme.font_size.step_3(),
-            Size::Four => theme.font_size.step_4(),
-            Size::Five => theme.font_size.step_5(),
-            Size::Six => theme.font_size.step_6(),
-            Size::Seven => theme.font_size.step_7(),
-            Size::Eight => theme.font_size.step_8(),
-            Size::Nine => theme.font_size.step_9(),
+    pub(crate) fn map_size<'a>(&'a self, theme: &'a Theme) -> impl Fn(Div) -> Div + '_ {
+        |div| match self.size {
+            Size::One => div
+                .text_size(theme.font_size.step_1())
+                .line_height(theme.line_height.step_1()),
+            Size::Two => div
+                .text_size(theme.font_size.step_2())
+                .line_height(theme.line_height.step_2()),
+            Size::Three => div
+                .text_size(theme.font_size.step_3())
+                .line_height(theme.line_height.step_3()),
+            Size::Four => div
+                .text_size(theme.font_size.step_4())
+                .line_height(theme.line_height.step_4()),
+            Size::Five => div
+                .text_size(theme.font_size.step_5())
+                .line_height(theme.line_height.step_5()),
+            Size::Six => div
+                .text_size(theme.font_size.step_6())
+                .line_height(theme.line_height.step_6()),
+            Size::Seven => div
+                .text_size(theme.font_size.step_7())
+                .line_height(theme.line_height.step_7()),
+            Size::Eight => div
+                .text_size(theme.font_size.step_8())
+                .line_height(theme.line_height.step_8()),
+            Size::Nine => div
+                .text_size(theme.font_size.step_9())
+                .line_height(theme.line_height.step_9()),
         }
     }
 

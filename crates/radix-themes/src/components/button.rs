@@ -133,7 +133,7 @@ impl Button {
         self
     }
 
-    fn render_gap(&self) -> Rems {
+    fn gap(&self) -> Rems {
         match self.size {
             ButtonSize::One => rems(0.25),
             ButtonSize::Two => rems(0.5),
@@ -141,7 +141,7 @@ impl Button {
         }
     }
 
-    fn render_px(&self) -> Rems {
+    fn px(&self) -> Rems {
         match self.size {
             ButtonSize::One => rems(0.5),
             ButtonSize::Two => rems(0.75),
@@ -150,7 +150,7 @@ impl Button {
         }
     }
 
-    fn render_border_radius(&self, theme: &Theme) -> Pixels {
+    fn border_radius(&self, theme: &Theme) -> Pixels {
         match self.radius.as_ref() {
             None => match self.size {
                 ButtonSize::One => theme.radius.step_1(),
@@ -168,7 +168,7 @@ impl Button {
         }
     }
 
-    fn render_border_color(&self, theme: &Theme) -> Hsla {
+    fn border_color(&self, theme: &Theme) -> Hsla {
         match self.variant {
             ButtonVariant::Classic => theme.gray().transparent.step_7(),
             ButtonVariant::Solid => transparent_white(),
@@ -179,7 +179,7 @@ impl Button {
         }
     }
 
-    fn render_height(&self, theme: &Theme) -> Pixels {
+    fn height(&self, theme: &Theme) -> Pixels {
         match self.size {
             ButtonSize::One => theme.space.step_5(),
             ButtonSize::Two => theme.space.step_6(),
@@ -188,7 +188,7 @@ impl Button {
         }
     }
 
-    fn render_font_size(&self, theme: &Theme) -> Pixels {
+    fn font_size(&self, theme: &Theme) -> Pixels {
         match self.size {
             ButtonSize::One => theme.font_size.step_1(),
             ButtonSize::Two => theme.font_size.step_2(),
@@ -197,7 +197,7 @@ impl Button {
         }
     }
 
-    fn render_line_height(&self, theme: &Theme) -> Pixels {
+    fn line_height(&self, theme: &Theme) -> Pixels {
         match self.size {
             ButtonSize::One => theme.line_height.step_1(),
             ButtonSize::Two => theme.line_height.step_2(),
@@ -206,7 +206,7 @@ impl Button {
         }
     }
 
-    fn render_padding_top(&self) -> Pixels {
+    fn padding_top(&self) -> Pixels {
         match self.size {
             ButtonSize::One => px(1.),
             ButtonSize::Two => px(2.),
@@ -215,7 +215,7 @@ impl Button {
         }
     }
 
-    fn render_text_color(&self, theme: &Theme) -> Hsla {
+    fn text_color(&self, theme: &Theme) -> Hsla {
         match self.variant {
             // TODO: classic
             ButtonVariant::Classic => theme.accent(self.color).contrast,
@@ -228,15 +228,15 @@ impl Button {
         }
     }
 
-    fn render_icon_color(&self, theme: &Theme) -> Hsla {
+    fn icon_color(&self, theme: &Theme) -> Hsla {
         if self.disabled {
-            self.render_disabled_text_color(theme)
+            self.disabled_text_color(theme)
         } else {
-            self.render_text_color(theme)
+            self.text_color(theme)
         }
     }
 
-    fn render_background(&self, theme: &Theme) -> Hsla {
+    fn background(&self, theme: &Theme) -> Hsla {
         match self.variant {
             // TODO: classic
             ButtonVariant::Classic => theme.accent(self.color).transparent.step_9(),
@@ -249,7 +249,7 @@ impl Button {
         }
     }
 
-    fn render_hovered_background(&self, theme: &Theme) -> Hsla {
+    fn hovered_background(&self, theme: &Theme) -> Hsla {
         match self.variant {
             // TODO: classic
             ButtonVariant::Classic => theme.accent(self.color).transparent.step_10(),
@@ -262,7 +262,7 @@ impl Button {
         }
     }
 
-    fn render_active_background(&self, theme: &Theme) -> Hsla {
+    fn active_background(&self, theme: &Theme) -> Hsla {
         match self.variant {
             // TODO: classic
             ButtonVariant::Classic => theme.accent(self.color).transparent.step_10(),
@@ -280,7 +280,7 @@ impl Button {
         }
     }
 
-    fn render_disabled_background(&self, theme: &Theme) -> Hsla {
+    fn disabled_background(&self, theme: &Theme) -> Hsla {
         match self.variant {
             // TODO: classic
             ButtonVariant::Classic
@@ -292,7 +292,7 @@ impl Button {
         }
     }
 
-    fn render_disabled_text_color(&self, theme: &Theme) -> Hsla {
+    fn disabled_text_color(&self, theme: &Theme) -> Hsla {
         theme.gray().transparent.step_8()
     }
 }
@@ -301,39 +301,39 @@ impl RenderOnce for Button {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
         let theme = cx.global::<Theme>();
 
-        let text_color = self.render_text_color(theme);
-        let label_padding_top = self.render_padding_top();
+        let text_color = self.text_color(theme);
+        let label_padding_top = self.padding_top();
 
         let mut element = div()
             .stack_h()
             .font_weight(theme.font_weight_medium)
-            .gap(self.render_gap())
-            .px(self.render_px())
-            .text_size(self.render_font_size(theme))
-            .line_height(self.render_line_height(theme))
-            .h(self.render_height(theme))
-            .rounded(self.render_border_radius(theme))
+            .gap(self.gap())
+            .px(self.px())
+            .text_size(self.font_size(theme))
+            .line_height(self.line_height(theme))
+            .h(self.height(theme))
+            .rounded(self.border_radius(theme))
             .text_color(text_color)
-            .bg(self.render_background(theme))
+            .bg(self.background(theme))
             // TODO: letter spacing
             // TODO: use box-shadow for border
             .border_1()
-            .border_color(self.render_border_color(theme))
+            .border_color(self.border_color(theme))
             .when(self.disabled || self.loading, |this| {
                 this.cursor(CursorStyle::OperationNotAllowed)
-                    .text_color(self.render_disabled_text_color(theme))
-                    .bg(self.render_disabled_background(theme))
+                    .text_color(self.disabled_text_color(theme))
+                    .bg(self.disabled_background(theme))
             })
             .when(self.loading, |this| this.px(theme.space.step_3()))
             // We need Stateful<Div> for active state
             .id(self.id.clone())
             .when(!(self.disabled || self.loading), |this| {
-                this.hover(|style| style.bg(self.render_hovered_background(theme)))
-                    .active(|style| style.bg(self.render_active_background(theme)))
+                this.hover(|style| style.bg(self.hovered_background(theme)))
+                    .active(|style| style.bg(self.active_background(theme)))
             });
 
         if !self.loading {
-            let icon_color = self.render_icon_color(theme);
+            let icon_color = self.icon_color(theme);
             if let Some(icon) = self.icon {
                 element = element.child(icon.size_3().text_color(icon_color));
             }

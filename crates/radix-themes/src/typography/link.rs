@@ -73,7 +73,7 @@ impl Link {
         |div| div.text_color(theme.accent(self.style.color).transparent.step_11())
     }
 
-    fn hover<'a>(&'a self, theme: &'a Theme) -> impl Fn(StyleRefinement) -> StyleRefinement + '_ {
+    fn hover<'a>(&'a self, _theme: &'a Theme) -> impl Fn(StyleRefinement) -> StyleRefinement + '_ {
         |style| style
     }
 

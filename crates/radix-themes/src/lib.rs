@@ -17,6 +17,7 @@ pub mod blockquote;
 pub mod button;
 pub mod checkbox;
 pub mod code;
+pub mod em;
 pub mod heading;
 pub mod icon;
 pub mod text;

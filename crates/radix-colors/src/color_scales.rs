@@ -48,8 +48,8 @@ pub struct ColorScales {
     pub lime: ColorScaleSet,
     pub mint: ColorScaleSet,
     pub sky: ColorScaleSet,
-    pub black: ColorScaleSet,
-    pub white: ColorScaleSet,
+    pub black: ColorScale,
+    pub white: ColorScale,
 }
 
 /// Returns a ColorScales object containing various color scales, which can be used to create consistent and harmonious color palettes.
@@ -2111,130 +2111,40 @@ pub(crate) fn sky() -> ColorScaleSet {
     .unwrap()
 }
 
-pub(crate) fn black() -> ColorScaleSet {
-    StaticColorScaleSet {
-        scale: "Black",
-        light: [
-            "#0000000d",
-            "#0000001a",
-            "#00000026",
-            "#00000033",
-            "#0000004d",
-            "#00000066",
-            "#00000080",
-            "#00000099",
-            "#000000b3",
-            "#000000cc",
-            "#000000e6",
-            "#000000f2",
-        ],
-        light_alpha: [
-            "#0000000d",
-            "#0000001a",
-            "#00000026",
-            "#00000033",
-            "#0000004d",
-            "#00000066",
-            "#00000080",
-            "#00000099",
-            "#000000b3",
-            "#000000cc",
-            "#000000e6",
-            "#000000f2",
-        ],
-        dark: [
-            "#0000000d",
-            "#0000001a",
-            "#00000026",
-            "#00000033",
-            "#0000004d",
-            "#00000066",
-            "#00000080",
-            "#00000099",
-            "#000000b3",
-            "#000000cc",
-            "#000000e6",
-            "#000000f2",
-        ],
-        dark_alpha: [
-            "#0000000d",
-            "#0000001a",
-            "#00000026",
-            "#00000033",
-            "#0000004d",
-            "#00000066",
-            "#00000080",
-            "#00000099",
-            "#000000b3",
-            "#000000cc",
-            "#000000e6",
-            "#000000f2",
-        ],
-    }
+pub(crate) fn black() -> ColorScale {
+    [
+        "#0000000d",
+        "#0000001a",
+        "#00000026",
+        "#00000033",
+        "#0000004d",
+        "#00000066",
+        "#00000080",
+        "#00000099",
+        "#000000b3",
+        "#000000cc",
+        "#000000e6",
+        "#000000f2",
+    ]
     .try_into()
     .unwrap()
 }
 
-pub(crate) fn white() -> ColorScaleSet {
-    StaticColorScaleSet {
-        scale: "White",
-        light: [
-            "#ffffff0d",
-            "#ffffff1a",
-            "#ffffff26",
-            "#ffffff33",
-            "#ffffff4d",
-            "#ffffff66",
-            "#ffffff80",
-            "#ffffff99",
-            "#ffffffb3",
-            "#ffffffcc",
-            "#ffffffe6",
-            "#fffffff2",
-        ],
-        light_alpha: [
-            "#ffffff0d",
-            "#ffffff1a",
-            "#ffffff26",
-            "#ffffff33",
-            "#ffffff4d",
-            "#ffffff66",
-            "#ffffff80",
-            "#ffffff99",
-            "#ffffffb3",
-            "#ffffffcc",
-            "#ffffffe6",
-            "#fffffff2",
-        ],
-        dark: [
-            "#ffffff0d",
-            "#ffffff1a",
-            "#ffffff26",
-            "#ffffff33",
-            "#ffffff4d",
-            "#ffffff66",
-            "#ffffff80",
-            "#ffffff99",
-            "#ffffffb3",
-            "#ffffffcc",
-            "#ffffffe6",
-            "#fffffff2",
-        ],
-        dark_alpha: [
-            "#ffffff0d",
-            "#ffffff1a",
-            "#ffffff26",
-            "#ffffff33",
-            "#ffffff4d",
-            "#ffffff66",
-            "#ffffff80",
-            "#ffffff99",
-            "#ffffffb3",
-            "#ffffffcc",
-            "#ffffffe6",
-            "#fffffff2",
-        ],
-    }
+pub(crate) fn white() -> ColorScale {
+    [
+        "#ffffff0d",
+        "#ffffff1a",
+        "#ffffff26",
+        "#ffffff33",
+        "#ffffff4d",
+        "#ffffff66",
+        "#ffffff80",
+        "#ffffff99",
+        "#ffffffb3",
+        "#ffffffcc",
+        "#ffffffe6",
+        "#fffffff2",
+    ]
     .try_into()
     .unwrap()
 }

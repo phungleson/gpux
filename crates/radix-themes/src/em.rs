@@ -33,7 +33,7 @@ impl ParentElement for Em {
 }
 
 impl RenderOnce for Em {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         div().italic().children(self.children)
     }
 }

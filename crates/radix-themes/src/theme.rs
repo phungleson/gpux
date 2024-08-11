@@ -17,7 +17,7 @@ use once_cell::sync::Lazy;
 
 use gpux_css::color::{hsla, white};
 use gpux_radix_colors::color_scale::ColorScale;
-use gpux_radix_colors::color_scales::{color_scales, ColorScales};
+use gpux_radix_colors::color_scales::{color_scales, ColorScales, StaticColorScale};
 use gpux_theme::theme_mode::ThemeMode;
 
 use crate::theme::nine_scale::NineScale;
@@ -182,6 +182,9 @@ pub struct Theme {
     crimson: ThemeColor,
     // Gray theme colors
     slate: ThemeColor,
+    // Shadows, highlights, and overlays
+    pub(crate) black: ColorScale,
+    pub(crate) white: ColorScale,
 
     pub(crate) font_size: NineScale<Pixels>,
     pub(crate) space: NineScale<Pixels>,
@@ -205,7 +208,8 @@ pub struct Theme {
 
 impl Theme {
     pub fn new(theme_mode: ThemeMode, accent_color: AccentColor, gray_color: GrayColor) -> Theme {
-        let black = &COLOR_SCALES.black;
+        let black_scale = COLOR_SCALES.black.clone();
+        let white_scale = COLOR_SCALES.white.clone();
         let scaling = 1.;
 
         Theme {
@@ -275,16 +279,19 @@ impl Theme {
             theme_mode,
             gray_color,
             accent_color,
-            // Accent colors
+            //
             indigo: ThemeColor::indigo(theme_mode),
             cyan: ThemeColor::cyan(theme_mode),
             orange: ThemeColor::orange(theme_mode),
             crimson: ThemeColor::crimson(theme_mode),
-            // Gray colors
+            //
             slate: ThemeColor::slate(theme_mode),
             //
+            black: black_scale,
+            white: white_scale,
+            //
             color_background: white(),
-            color_overlay: black.light_alpha().step_6(),
+            color_overlay: COLOR_SCALES.black.step_6(),
             color_panel_solid: white(),
             color_panel_translucent: rgba(0xffffffb3).into(),
             color_surface: rgba(0xffffffd9).into(),

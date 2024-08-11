@@ -20,6 +20,7 @@ pub mod code;
 pub mod em;
 pub mod heading;
 pub mod icon;
+pub mod kbd;
 pub mod text;
 pub mod theme;
 pub mod typography;

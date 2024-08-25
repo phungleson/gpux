@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{FontWeight, Global, Hsla, Pixels, px, rems, Rems, rgba, SharedString};
+use gpui::{px, rems, rgba, FontWeight, Global, Hsla, Pixels, Rems, SharedString};
 use once_cell::sync::Lazy;
 
 use gpux_css::color::{hsla, white};

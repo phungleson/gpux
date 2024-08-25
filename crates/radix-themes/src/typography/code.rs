@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use gpui::prelude::FluentBuilder;
 use gpui::{
-    AnyElement, div, Div, IntoElement, ParentElement, Pixels, px, rems, RenderOnce, Styled,
+    div, px, rems, AnyElement, Div, IntoElement, ParentElement, Pixels, RenderOnce, Styled,
     WindowContext,
 };
-use gpui::prelude::FluentBuilder;
 use smallvec::SmallVec;
 
 use crate::theme::{AccentColor, Theme};

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 use gpui::{
-    AnyElement, div, IntoElement, ParentElement, px, rems, RenderOnce, Styled, WindowContext,
+    div, px, rems, AnyElement, IntoElement, ParentElement, RenderOnce, Styled, WindowContext,
 };
 use smallvec::{smallvec, SmallVec};
 

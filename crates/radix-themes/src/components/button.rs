@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{
-    CursorStyle, div, ElementId, Hsla, InteractiveElement, IntoElement, ParentElement, Pixels, px,
-    rems, Rems, RenderOnce, SharedString, StatefulInteractiveElement, Styled, Svg, WindowContext,
-};
 use gpui::prelude::FluentBuilder;
+use gpui::{
+    div, px, rems, CursorStyle, ElementId, Hsla, InteractiveElement, IntoElement, ParentElement,
+    Pixels, Rems, RenderOnce, SharedString, StatefulInteractiveElement, Styled, Svg, WindowContext,
+};
 
 use gpux_css::color::transparent_white;
 use gpux_css::hsla_ext::HslaExt;

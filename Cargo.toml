@@ -10,7 +10,7 @@ members = [
 resolver = "2"
 
 [workspace.dependencies]
-gpui = { git = "https://github.com/phungleson/zed.git", branch = "gpux" }
+gpui = { git = "https://github.com/phungleson/gpui.git" }
 anyhow = "1"
 log = "0.4"
 serde = "1.0.203"

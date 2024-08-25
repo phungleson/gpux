@@ -17,8 +17,8 @@ use gpui::{div, IntoElement, ParentElement, Render, Styled, ViewContext, VisualC
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
 use gpux_interactivity::{disableable::Disableable, selection::Selection};
-use gpux_radix_themes::components::{CheckboxSize, CheckboxVariant};
 use gpux_radix_themes::components::Checkbox;
+use gpux_radix_themes::components::{CheckboxSize, CheckboxVariant};
 use gpux_radix_themes::theme::AccentColor;
 
 use crate::app::run_app;

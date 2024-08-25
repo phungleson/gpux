@@ -18,5 +18,5 @@ We need to use the `phungleson/zed` fork at this time because it contains severa
 
 ```toml
 [dependencies]
-gpui = { git = "https://github.com/phungleson/zed.git", branch = "gpux" }
+gpui = { git = "https://github.com/phungleson/gpui.git" }
 ```

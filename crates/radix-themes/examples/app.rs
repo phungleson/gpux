@@ -1,5 +1,5 @@
 use gpui::{
-    App, Bounds, px, Render, size, ViewContext, VisualContext, WindowBounds, WindowOptions,
+    px, size, App, Bounds, Render, ViewContext, VisualContext, WindowBounds, WindowOptions,
 };
 
 use gpux_radix_themes::assets::Assets;

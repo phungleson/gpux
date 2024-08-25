@@ -14,10 +14,10 @@
 
 use std::fmt;
 
-use gpui::{div, InteractiveElement, Pixels, px, rems, StatefulInteractiveElement, Styled};
+use gpui::{div, px, rems, InteractiveElement, Pixels, StatefulInteractiveElement, Styled};
 use gpui::{
-    ElementId, IntoElement, ParentElement, prelude::FluentBuilder as _, RenderOnce, SharedString,
-    svg, WindowContext,
+    prelude::FluentBuilder as _, svg, ElementId, IntoElement, ParentElement, RenderOnce,
+    SharedString, WindowContext,
 };
 
 use gpux_css::color::transparent_white;

@@ -12,18 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{
-    div, IntoElement, ParentElement, Render, Styled, ViewContext,
-    VisualContext,
-};
+use gpui::{div, IntoElement, ParentElement, Render, Styled, ViewContext, VisualContext};
 
+use crate::app::run_app;
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
 use gpux_radix_themes::theme::AccentColor;
-use gpux_radix_themes::typography::{Size, Weight};
 use gpux_radix_themes::typography::blockquote;
 use gpux_radix_themes::typography::Wrap;
-use crate::app::run_app;
+use gpux_radix_themes::typography::{Size, Weight};
 
 mod app;
 

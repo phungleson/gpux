@@ -12,10 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{
-    div, IntoElement, ParentElement, Render, Styled, ViewContext,
-    VisualContext,
-};
+use gpui::{div, IntoElement, ParentElement, Render, Styled, ViewContext, VisualContext};
 
 use gpux_css::color::white;
 use gpux_radix_themes::typography::strong;

@@ -13,7 +13,3 @@ anyhow.workspace = true
 
 [lints]
 workspace = true
-
-[[example]]
-name = "main"
-path = "examples/main.rs"

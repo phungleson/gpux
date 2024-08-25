@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use gpui::{div, IntoElement, ParentElement, Render, Styled, svg, ViewContext, VisualContext};
+use gpui::{div, svg, IntoElement, ParentElement, Render, Styled, ViewContext, VisualContext};
 
 use gpux_css::color::white;
 use gpux_css::stack_ext::StackExt;
-use gpux_radix_themes::components::{button, ButtonRadius, ButtonSize, ButtonVariant};
 use gpux_radix_themes::components::CheckboxIcon;
+use gpux_radix_themes::components::{button, ButtonRadius, ButtonSize, ButtonVariant};
 use gpux_radix_themes::theme::AccentColor;
 
 use crate::app::run_app;
